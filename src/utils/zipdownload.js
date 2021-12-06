@@ -15,11 +15,17 @@ export function downLoadZip(str, filename) {
     responseType: 'blob',
     headers: { 'Authorization': 'Bearer ' + getToken() }
   }).then(res => {
-    if(filename){
-      res.headers['content-disposition'] = 'attachment; filename='+filename;
-    }
     resolveBlob(res, mimeMap.zip)
   })
+}
+
+export function downLoadFile(str) {
+  var url = baseUrl + str
+  const aLink = document.createElement('a')
+  aLink.href = url
+  document.body.appendChild(aLink)
+  aLink.click()
+  document.body.appendChild(aLink)
 }
 /**
  * 解析blob响应内容并下载
@@ -31,7 +37,7 @@ export function resolveBlob(res, mimeType) {
   var blob = new Blob([res.data], { type: mimeType })
   // //从response的headers中获取filename, 后端response.setHeader("Content-disposition", "attachment; filename=xxxx.docx") 设置的文件名;
   var patt = new RegExp('filename=([^;]+\\.[^\\.;]+);*')
-  var contentDisposition = decodeURI(res.headers['content-disposition']||res.headers['Content-Disposition'])
+  var contentDisposition = decodeURI(res.headers['content-disposition'])
   var result = patt.exec(contentDisposition)
   var fileName = result[1]
   fileName = fileName.replace(/\"/g, '')

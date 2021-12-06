@@ -1,28 +1,32 @@
 module.exports = {
-  title: 'gfast管理系统',
+  title: 'go-admin后台管理系统',
 
   /**
-   * 是否系统布局配置
+   * @type {boolean} true | false
+   * @description Whether show the settings right-panel
    */
-  showSettings: false,
+  showSettings: true,
 
   /**
    * 是否显示顶部导航
    */
-  topNav: false,
+  topNav: true,
 
   /**
-   * 是否显示 tagsView
+   * @type {boolean} true | false
+   * @description Whether need tagsView
    */
   tagsView: true,
 
   /**
-   * 是否固定头部
+   * @type {boolean} true | false
+   * @description Whether fix the header
    */
-  fixedHeader: false,
+  fixedHeader: true,
 
   /**
-   * 是否显示logo
+   * @type {boolean} true | false
+   * @description Whether show the logo in sidebar
    */
   sidebarLogo: true,
 
@@ -32,5 +36,7 @@ module.exports = {
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['production', 'development']
    */
-  errorLog: 'production'
+  errorLog: 'production',
+
+  themeStyle: 'dark'
 }
