@@ -217,6 +217,7 @@
             align="center"
             prop="idNumber"
             :show-overflow-tooltip="true"
+            width="120"
           />
           <el-table-column
             label="邀请码"
@@ -252,6 +253,7 @@
             align="center"
             prop="birthday"
             :show-overflow-tooltip="true"
+            width="130"
           >
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.birthday) }}</span>
