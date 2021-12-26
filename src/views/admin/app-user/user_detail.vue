@@ -2,32 +2,54 @@
 
   <div>
     <el-card>
-      <el-descriptions title="基本信息" class="margin-top" :column="5" border>
-        <el-descriptions-item label="头像">
+        <div>
           <el-avatar shape="square" :size="50" :src="form.headPortrait===''?initUrl:form.headPortrait" />
-        </el-descriptions-item>
-        <el-descriptions-item label="用户名">
-          {{ form.uName }}
-        </el-descriptions-item>
-        <el-descriptions-item label="手机号">{{ form.phone }}</el-descriptions-item>
-        <el-descriptions-item label="昵称">{{ form.nickName }}</el-descriptions-item>
-        <el-descriptions-item label="微信名称">{{ form.weinxinName }}</el-descriptions-item>
-        <el-descriptions-item label="微信号">{{ form.weixin }}</el-descriptions-item>
-        <el-descriptions-item label="身份证号">{{ form.idNumber }}</el-descriptions-item>
-        <el-descriptions-item label="性别">{{ this.sexFormat(form) }}</el-descriptions-item>
-        <el-descriptions-item label="邀请码"><el-tag size="small">{{ form.invitationCode }}</el-tag></el-descriptions-item>
-        <el-descriptions-item label="终端ip"> {{ form.ipAddr }}</el-descriptions-item>
-        <el-descriptions-item label="注册设备">{{ form.regDevice }}</el-descriptions-item>
-        <el-descriptions-item label="是否实名">{{ this.isRealFormat(form) }}</el-descriptions-item>
-        <el-descriptions-item label="生日">{{ this.getTimes(form.birthday) }}</el-descriptions-item>
-        <el-descriptions-item label="用户类型">{{ this.ridFormat(form) }}</el-descriptions-item>
-        <el-descriptions-item label="vip类型">{{ this.vidFormat(form) }}</el-descriptions-item>
-        <el-descriptions-item label="vip到期时间">{{ this.getTimes(form.vipEndTime) }}</el-descriptions-item>
-        <el-descriptions-item label="账号状态"><el-tag>{{ this.stateFormat(form) }}</el-tag></el-descriptions-item>
-        <el-descriptions-item label="最后登录IP">{{ form.lastLoginIp }}</el-descriptions-item>
-        <el-descriptions-item label="最后登录时间">{{ this.getTimes(form.lastLoginTime) }}</el-descriptions-item>
-        <el-descriptions-item label="是否虚拟用户"><el-tag>{{ this.isVirtualFormat(form) }}</el-tag></el-descriptions-item>
-      </el-descriptions>
+          <el-divider></el-divider>
+          <span>用户名：{{ form.uName }} </span>
+          <el-divider direction="vertical"></el-divider>
+          <span>手机号：{{ form.phone }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>身份证号：{{ form.idNumber }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>性别：{{  this.sexFormat(form) }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>生日：{{ this.getTimes(form.birthday) }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>邀请码：<el-tag size="small">{{ form.invitationCode }}</el-tag></span>
+          <el-divider></el-divider>
+
+          <span>昵称：{{ form.nickName }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>微信名称：{{ form.weinxinName }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>微信号：{{ form.weixin }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>用户类型：{{  this.ridFormat(form) }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>vip：{{ this.vidFormat(form)}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>vip到期时间：{{ this.getTimes(form.vipEndTime)}}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>是否实名：{{ this.isRealFormat(form) }}</span>
+          <el-divider></el-divider>
+          <span>终端ip：{{ form.ipAddr }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>注册设备：{{ form.regDevice }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>账号状态：
+            <el-tag type="success" v-if="form.state===1">{{ this.stateFormat(form) }}</el-tag>
+            <el-tag type="danger" v-else>{{ this.stateFormat(form) }}</el-tag>
+          </span>
+          <el-divider direction="vertical"></el-divider>
+          <span>最后登录IP：{{ form.lastLoginIp }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>最后登录时间：{{ this.getTimes(form.lastLoginTime) }}</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>是否虚拟用户：
+            <el-tag type="warning" v-if="form.isVirtual === 1">{{ this.isVirtualFormat(form) }}</el-tag>
+            <el-tag v-else >{{ this.isVirtualFormat(form) }}</el-tag>
+          </span>
+        </div>
     </el-card>
 
   </div>
