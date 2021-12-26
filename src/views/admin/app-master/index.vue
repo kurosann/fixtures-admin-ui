@@ -53,7 +53,16 @@
 
         <el-table v-loading="loading" :data="appMasterList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55" align="center"/>
-          <el-table-column label="师傅ID" align="center" prop="userId"
+          <el-table-column label="会员ID" align="center" prop="userId"
+                           :show-overflow-tooltip="true"
+          />
+          <el-table-column label="用户名" align="center" prop="uName"
+                           :show-overflow-tooltip="true"
+          />
+          <el-table-column label="手机号" align="center" prop="phone"
+                           :show-overflow-tooltip="true"
+          />
+          <el-table-column label="微信" align="center" prop="weixinName"
                            :show-overflow-tooltip="true"
           />
           <el-table-column label="服务分数" align="center" prop="services"
@@ -87,21 +96,15 @@
           />
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template slot-scope="scope">
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要修改吗?"
-                confirm-button-text="修改"
-                @onConfirm="handleUpdate(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appMaster:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-edit"
-                >修改
-                </el-button>
-              </el-popconfirm>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appMaster:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                @click="editUpdate(scope.row)"
+              >修改
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -132,7 +135,7 @@
                   v-for="dict in stateOptions"
                   :key="dict.value"
                   :label="dict.value"
-                >{{ dict.label }}
+                >{{dict.label}}
                 </el-radio>
               </el-radio-group>
             </el-form-item>
@@ -188,7 +191,7 @@ export default {
         },
         {
           value: 2,
-          label: '拉黑'
+          label: '停用'
         }
       ],
       realStateOptions: [{
@@ -224,9 +227,6 @@ export default {
   },
   created() {
     this.getList()
-    this.getDicts('sys_normal_disable').then(response => {
-      this.stateOptions = response.data
-    })
   },
   methods: {
     /** 查询参数列表 */
@@ -307,9 +307,10 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
+      console.log(row)
       this.reset()
-      const id =
-        row.id || this.ids
+      const id = row.id || this.ids
+      console.log(id)
       getAppMaster(id).then(response => {
         this.form = response.data
         this.open = true
@@ -317,16 +318,27 @@ export default {
         this.isEdit = true
       })
     },
+
+    /** 修改按钮操作 */
+    editUpdate(row) {
+      console.log(row)
+      this.reset()
+      getAppMaster(row.id).then(response => {
+        this.form = response.data
+        this.open = true
+        this.title = '修改师傅详情'
+        this.isEdit = true
+      })
+    },
+
     /** 提交按钮 */
     submitForm: function() {
       this.$refs['form'].validate(valid => {
         const obj = JSON.parse(JSON.stringify(this.form))
-        obj.rid = parseInt(this.form.rid)
-        obj.sex = parseInt(this.form.sex)
-        obj.vid = parseInt(this.form.vid)
+        obj.state = parseInt(this.form.state)
         if (valid) {
           if (this.form.id !== undefined) {
-            updateAppMaster(this.form).then(response => {
+            updateAppMaster(obj).then(response => {
               if (response.code === 200) {
                 this.msgSuccess(response.msg)
                 this.open = false

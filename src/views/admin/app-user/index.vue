@@ -163,17 +163,6 @@
             >新增
             </el-button>
           </el-col>
-          <el-col :span="1.5">
-            <el-button
-              v-permisaction="['admin:appUser:edit']"
-              type="success"
-              icon="el-icon-edit"
-              size="mini"
-              :disabled="single"
-              @click="handleUpdate"
-            >修改
-            </el-button>
-          </el-col>
         </el-row>
 
         <el-table v-loading="loading" :data="appUserList">
@@ -192,7 +181,7 @@
           <el-table-column
             label="微信名称"
             align="center"
-            prop="weinxinName"
+            prop="weixinName"
             :show-overflow-tooltip="true"
           />
           <el-table-column
@@ -333,21 +322,15 @@
             width="150"
           >
             <template slot-scope="scope">
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要修改吗?"
-                confirm-button-text="修改"
-                @onConfirm="handleUpdate(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appUser:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-edit"
-                >修改
-                </el-button>
-              </el-popconfirm>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appUser:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                @click="handleUpdate(scope.row)"
+              >修改
+              </el-button>
               <el-button
                 slot="reference"
                 v-permisaction="['admin:appUser:edit']"
@@ -423,7 +406,7 @@
               label="头像"
               prop="headPortrait"
             >
-              <el-avatar v-model="form.headPortrait" placeholder="头像" />
+              <el-avatar shape="square" :size="50" :src="form.headPortrait===''?initUrl:form.headPortrait" />
             </el-form-item>
             <el-form-item label="用户名" prop="uName">
               <el-input v-model="form.uName" placeholder="用户名" />
@@ -431,8 +414,8 @@
             <el-form-item label="昵称" prop="nickName">
               <el-input v-model="form.nickName" placeholder="昵称" />
             </el-form-item>
-            <el-form-item label="微信名称" prop="weinxinName">
-              <el-input v-model="form.weinxinName" placeholder="微信名称" />
+            <el-form-item label="微信名称" prop="weixinName">
+              <el-input v-model="form.weixinName" placeholder="微信名称" />
             </el-form-item>
             <el-form-item label="微信号" prop="weixin">
               <el-input v-model="form.weixin" placeholder="微信号" />
@@ -604,6 +587,7 @@ export default {
   },
   data() {
     return {
+      initUrl: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       // 遮罩层
       loading: true,
       // 选中数组
@@ -668,7 +652,7 @@ export default {
         pid: undefined,
         uName: undefined,
         nickName: undefined,
-        weinxinName: undefined,
+        weixinName: undefined,
         weixin: undefined,
         phone: undefined,
         sex: undefined,
@@ -751,7 +735,7 @@ export default {
         pid: undefined,
         uName: undefined,
         nickName: undefined,
-        weinxinName: undefined,
+        weixinName: undefined,
         weixin: undefined,
         phone: undefined,
         sex: undefined,

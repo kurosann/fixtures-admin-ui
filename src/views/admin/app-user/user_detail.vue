@@ -20,7 +20,7 @@
 
           <span>昵称：{{ form.nickName }}</span>
           <el-divider direction="vertical"></el-divider>
-          <span>微信名称：{{ form.weinxinName }}</span>
+          <span>微信名称：{{ form.weixinName }}</span>
           <el-divider direction="vertical"></el-divider>
           <span>微信号：{{ form.weixin }}</span>
           <el-divider direction="vertical"></el-divider>
@@ -129,7 +129,7 @@ export default {
         pid: undefined,
         uName: undefined,
         nickName: undefined,
-        weinxinName: undefined,
+        weixinName: undefined,
         weixin: undefined,
         phone: undefined,
         sex: undefined,
