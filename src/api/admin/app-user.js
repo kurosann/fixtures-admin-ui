@@ -35,6 +35,23 @@ export function updateAppUser(data) {
   })
 }
 
+// 用户状态修改AppUser
+export function updateAppUserState(data) {
+  return request({
+    url: '/api/v1/app-user/state/' + data.id,
+    method: 'put',
+    data: data
+  })
+}
+
+// 查询子用户list
+export function findSubUser(data) {
+  return request({
+    url: '/api/v1/app-user/sub_user/' + data.id,
+    method: 'get'
+  })
+}
+
 // 删除AppUser
 export function delAppUser(data) {
   return request({
