@@ -100,7 +100,7 @@
                            :show-overflow-tooltip="true" width="100"/>
           <el-table-column label="备注" align="center" prop="remake"
                            :show-overflow-tooltip="true"/>
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right"  width="120">
             <template slot-scope="scope">
               <el-popconfirm
                 class="delete-popconfirm"
@@ -416,17 +416,20 @@ export default {
       return formItem_material
     },
     setItemMaterialList(row) {
-      this.item_material = item_material
-      for (let i = 0; i < row.length; i++) {
-        this.item_material["id" + i] = row[i].id
-        this.item_material["name" + i] = row[i].material_name
-        for (let j = 0; j < row[i].item_material_price.length; j++) {
-          this.item_material["id" + i + j] = row[i].item_material_price[j].id
-          this.item_material["format_name" + i + j] = row[i].item_material_price[j].format_name
-          this.item_material["price" + i + j] = row[i].item_material_price[j].price
-          this.item_material["format_url" + i + j] = row[i].item_material_price[j].format_url
+      this.item_material = JSON.parse(JSON.stringify(item_material))
+      if (row !== null){
+        for (let i = 0; i < row.length; i++) {
+          this.item_material["id" + i] = row[i].id
+          this.item_material["name" + i] = row[i].material_name
+          for (let j = 0; j < row[i].item_material_price.length; j++) {
+            this.item_material["id" + i + j] = row[i].item_material_price[j].id
+            this.item_material["format_name" + i + j] = row[i].item_material_price[j].format_name
+            this.item_material["price" + i + j] = row[i].item_material_price[j].price
+            this.item_material["format_url" + i + j] = row[i].item_material_price[j].format_url
+          }
         }
       }
+
     },
     // 关系
     // 文件
@@ -461,6 +464,8 @@ export default {
         row.id || this.ids
       getAppItem(id).then(response => {
         this.form = response.data
+        console.log(this.form.item_material)
+        this.setItemMaterialList(this.form.item_material)
         this.open = true
         this.title = '修改材料管理'
         this.isEdit = true
@@ -472,7 +477,7 @@ export default {
       this.$refs['form'].validate(valid => {
         if (valid) {
           this.form.item_material = this.itemMaterialList(this.item_material)
-          console.log(this.form)
+          console.log(this.form.id)
           if (this.form.id !== undefined) {
             updateAppItem(this.form).then(response => {
               if (response.code === 200) {

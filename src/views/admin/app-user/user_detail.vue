@@ -3,7 +3,7 @@
   <div>
     <el-card>
         <div>
-          <el-avatar shape="square" :size="50" :src="form.headPortrait===''?initUrl:form.headPortrait" />
+          <el-avatar shape="square" :size="50" :src="form.headPortrait===''? initUrl:form.headPortrait" />
           <el-divider></el-divider>
           <span>用户名：{{ form.uName }} </span>
           <el-divider direction="vertical"></el-divider>
@@ -154,7 +154,7 @@ export default {
       this.form[this.fileIndex] = this.$refs['fileChoose'].resultList[0].fullUrl
     },
     getTimes(str) {
-      const time = moment(str).format('YYYY-MM-DD')
+      const time = moment(str).format('YYYY-MM-DD HH:mm:ss')
       if (time === '0001-01-01') {
         return ''
       }

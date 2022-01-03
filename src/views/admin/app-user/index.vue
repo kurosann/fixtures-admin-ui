@@ -10,6 +10,7 @@
         >
           <el-form-item label="用户名" prop="uName">
             <el-input
+              style="width: 150px"
               v-model="queryParams.uName"
               placeholder="请输入用户名"
               clearable
@@ -19,6 +20,7 @@
           </el-form-item>
           <el-form-item label="手机号" prop="phone">
             <el-input
+              style="width: 150px"
               v-model="queryParams.phone"
               placeholder="请输入手机号"
               clearable
@@ -26,10 +28,32 @@
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
+
+          <el-form-item label="邀请码" prop="invitationCode">
+            <el-input
+              style="width: 150px"
+              v-model="queryParams.invitationCode"
+              placeholder="输入邀请码"
+              clearable
+              size="small"
+              @keyup.enter.native="handleQuery"
+            />
+          </el-form-item>
+          <el-form-item label="注册设备" prop="regDevice">
+            <el-input
+              style="width: 150px"
+              v-model="queryParams.regDevice"
+              placeholder="注册设备"
+              clearable
+              size="small"
+              @keyup.enter.native="handleQuery"
+            />
+          </el-form-item>
           <el-form-item label="性别" prop="sex">
             <el-select
+              style="width: 150px"
               v-model="queryParams.sex"
-              placeholder="用户信息表性别"
+              placeholder="用户性别"
               clearable
               size="small"
             >
@@ -41,28 +65,11 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="邀请码" prop="invitationCode">
-            <el-input
-              v-model="queryParams.invitationCode"
-              placeholder="请输入邀请码"
-              clearable
-              size="small"
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
-          <el-form-item label="注册设备" prop="regDevice">
-            <el-input
-              v-model="queryParams.regDevice"
-              placeholder="请输入注册设备"
-              clearable
-              size="small"
-              @keyup.enter.native="handleQuery"
-            />
-          </el-form-item>
           <el-form-item label="是否实名" prop="isReal">
             <el-select
+              style="width: 150px"
               v-model="queryParams.isReal"
-              placeholder="用户信息表是否实名"
+              placeholder="是否实名"
               clearable
               size="small"
             >
@@ -76,6 +83,7 @@
           </el-form-item>
           <el-form-item label="用户类型" prop="rid">
             <el-select
+              style="width: 150px"
               v-model="queryParams.rid"
               placeholder="请选择"
               clearable
@@ -91,6 +99,7 @@
           </el-form-item>
           <el-form-item label="vip类型" prop="vid">
             <el-select
+              style="width: 150px"
               v-model="queryParams.vid"
               placeholder="请选择"
               clearable
@@ -106,8 +115,9 @@
           </el-form-item>
           <el-form-item label="账号状态" prop="state">
             <el-select
+              style="width: 150px"
               v-model="queryParams.state"
-              placeholder="用户信息表账号状态"
+              placeholder="请选择"
               clearable
               size="small"
             >
@@ -143,12 +153,14 @@
               icon="el-icon-search"
               size="mini"
               @click="handleQuery"
-            >搜索</el-button>
+            >搜索
+            </el-button>
             <el-button
               icon="el-icon-refresh"
               size="mini"
               @click="resetQuery"
-            >重置</el-button>
+            >重置
+            </el-button>
           </el-form-item>
         </el-form>
 
@@ -166,6 +178,12 @@
         </el-row>
 
         <el-table v-loading="loading" :data="appUserList">
+          <el-table-column
+            label="编号"
+            align="center"
+            prop="id"
+            :show-overflow-tooltip="true"
+          />
           <el-table-column
             label="用户名"
             align="center"
@@ -247,6 +265,7 @@
             align="center"
             prop="birthday"
             :show-overflow-tooltip="true"
+            width="150"
           >
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.birthday) }}</span>
@@ -394,6 +413,7 @@
 
         <!-- 添加或修改对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="80%">
+
           <el-form
             ref="form"
             :model="form"
@@ -401,141 +421,149 @@
             :inline="true"
             label-width="100px"
           >
-            <el-form-item
-              v-if="form.id !== undefined"
-              label="头像"
-              prop="headPortrait"
-            >
-              <el-avatar shape="square" :size="50" :src="form.headPortrait===''?initUrl:form.headPortrait" />
-            </el-form-item>
-            <el-form-item label="用户名" prop="uName">
-              <el-input v-model="form.uName" placeholder="用户名" />
-            </el-form-item>
-            <el-form-item label="昵称" prop="nickName">
-              <el-input v-model="form.nickName" placeholder="昵称" />
-            </el-form-item>
-            <el-form-item label="微信名称" prop="weixinName">
-              <el-input v-model="form.weixinName" placeholder="微信名称" />
-            </el-form-item>
-            <el-form-item label="微信号" prop="weixin">
-              <el-input v-model="form.weixin" placeholder="微信号" />
-            </el-form-item>
-            <el-form-item label="手机号" prop="phone">
-              <el-input v-model="form.phone" placeholder="手机号" />
-            </el-form-item>
-            <el-form-item label="性别" prop="sex">
-              <el-select v-model="form.sex" placeholder="请选择">
-                <el-option
-                  v-for="dict in sexOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="身份证号" prop="idNumber">
-              <el-input v-model="form.idNumber" placeholder="身份证号" />
-            </el-form-item>
-            <el-form-item v-if="form.id !== undefined" label="邀请码" prop="invitationCode">
-              <el-input v-model="form.invitationCode" placeholder="邀请码" />
-            </el-form-item>
-            <el-form-item label="终端ip" prop="ipAddr">
-              <el-input v-model="form.ipAddr" placeholder="终端ip" />
-            </el-form-item>
-            <el-form-item label="注册设备" prop="regDevice">
-              <el-input v-model="form.regDevice" placeholder="注册设备" />
-            </el-form-item>
-            <el-form-item label="是否实名" prop="isReal">
-              <el-select v-model="form.isReal" placeholder="请选择">
-                <el-option
-                  v-for="dict in isRealOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="生日" prop="birthday">
-              <el-date-picker
-                v-model="form.birthday"
-                type="datetime"
-                placeholder="选择日期"
-              />
-            </el-form-item>
-            <el-form-item label="用户类型" prop="rid">
-              <el-select v-model="form.rid" placeholder="请选择">
-                <el-option
-                  v-for="dict in ridOptions"
-                  :key="dict.value"
-                  :label="dict.key"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="vip类型" prop="vid">
-              <el-select v-model="form.vid" placeholder="请选择">
-                <el-option
-                  v-for="dict in vidOptions"
-                  :key="dict.value"
-                  :label="dict.key"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item
-              v-if="form.id !== undefined"
-              label="vip到期时间"
-              prop="vipEndTime"
-            >
-              <el-date-picker
-                v-model="form.vipEndTime"
-                type="datetime"
-                placeholder="选择日期"
-              />
-            </el-form-item>
-            <el-form-item label="账号状态" prop="state">
-              <el-select v-model="form.state" placeholder="请选择">
-                <el-option
-                  v-for="dict in stateOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item
-              v-if="form.id !== undefined"
-              label="最后登录IP"
-              prop="lastLoginIp"
-            >
-              <el-input
-                v-model="form.lastLoginIp"
-                placeholder="最后登录IP"
-                disabled="disabled"
-              />
-            </el-form-item>
-            <el-form-item
-              v-if="form.id !== undefined"
-              label="最后登录时间"
-              prop="lastLoginTime"
-            >
-              <el-date-picker
-                v-model="form.lastLoginTime"
-                disabled="disabled"
-                type="datetime"
-                placeholder="选择日期"
-              />
-            </el-form-item>
-            <el-form-item label="是否虚拟用户" prop="isVirtual">
-              <el-select v-model="form.isVirtual" placeholder="请选择">
-                <el-option
-                  v-for="dict in isVirtualOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
+            <el-row :gutter="20">
+              <el-col :span="2">
+                <el-avatar v-if="form.id !== undefined" :size="60" :src="form.headPortrait===''? initUrl:form.headPortrait"/>
+                  <el-avatar :size="60" src="https://empty" @error="true" v-else>
+                    <img :src="initUrl"/>
+                  </el-avatar>
+              </el-col>
+              <el-col :span="22">
+                <el-form-item label="用户名" prop="uName">
+                  <el-input v-model="form.uName" placeholder="用户名"/>
+                </el-form-item>
+                <el-form-item label="昵称" prop="nickName">
+                  <el-input v-model="form.nickName" placeholder="昵称"/>
+                </el-form-item>
+                <el-form-item label="微信名称" prop="weixinName">
+                  <el-input v-model="form.weixinName" placeholder="微信名称"/>
+                </el-form-item>
+                <el-form-item label="微信号" prop="weixin">
+                  <el-input v-model="form.weixin" placeholder="微信号"/>
+                </el-form-item>
+                <el-form-item label="手机号" prop="phone">
+                  <el-input v-model="form.phone" placeholder="手机号"/>
+                </el-form-item>
+                <el-form-item label="身份证号" prop="idNumber">
+                  <el-input v-model="form.idNumber" placeholder="身份证号"/>
+                </el-form-item>
+                <el-form-item v-if="form.id !== undefined" label="邀请码" prop="invitationCode">
+                  <el-input v-model="form.invitationCode" placeholder="邀请码"/>
+                </el-form-item>
+                <el-form-item label="性别" prop="sex">
+                  <el-select v-model="form.sex" placeholder="请选择" style="width: 183px">
+                    <el-option
+                      v-for="dict in sexOptions"
+                      :key="parseInt(dict.value)"
+                      :label="dict.label"
+                      :value="parseInt(dict.value)"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="是否实名" prop="isReal">
+                  <el-select v-model="form.isReal" placeholder="请选择" style="width: 183px">
+                    <el-option
+                      v-for="dict in isRealOptions"
+                      :key="dict.value"
+                      :label="dict.label"
+                      :value="dict.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="用户类型" prop="rid">
+                  <el-select v-model="form.rid" placeholder="请选择" style="width: 183px">
+                    <el-option
+                      v-for="dict in ridOptions"
+                      :key="parseInt(dict.value)"
+                      :label="dict.key"
+                      :value="parseInt(dict.value)"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="VIP类型" prop="vid">
+                  <el-select v-model="form.vid" placeholder="请选择" style="width: 183px">
+                    <el-option
+                      v-for="dict in vidOptions"
+                      :key="parseInt(dict.value)"
+                      :label="dict.key"
+                      :value="parseInt(dict.value)"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="生日" prop="birthday">
+                  <el-date-picker
+                    style="width: 185px"
+                    v-model="form.birthday"
+                    type="date"
+                    placeholder="选择日期"
+                  />
+                </el-form-item>
+                <el-form-item label="账号状态" prop="state">
+                  <el-select v-model="form.state" placeholder="请选择" style="width: 185px">
+                    <el-option
+                      v-for="dict in stateOptions"
+                      :key="dict.value"
+                      :label="dict.label"
+                      :value="dict.value"
+                    />
+                  </el-select>
+                </el-form-item>
+
+                <el-form-item label="注册设备" prop="regDevice">
+                  <el-input v-model="form.regDevice" placeholder="注册设备" disabled="disabled"/>
+                </el-form-item>
+                <el-form-item
+                  v-if="form.id !== undefined"
+                  label="VIP到期时间"
+                  prop="vipEndTime"
+                >
+                  <el-date-picker
+                    v-model="form.vipEndTime"
+                    style="width: 185px"
+                    type="date"
+                    placeholder="选择日期"
+                    disabled="disabled"
+                  />
+                </el-form-item>
+                <el-form-item label="是否虚拟用户" prop="isVirtual">
+                  <el-select v-model="form.isVirtual" placeholder="请选择" style="width: 185px">
+                    <el-option
+                      v-for="dict in isVirtualOptions"
+                      :key="dict.value"
+                      :label="dict.label"
+                      :value="dict.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item
+                  v-if="form.id !== undefined"
+                  label="最后登录IP"
+                  prop="lastLoginIp"
+                >
+                  <el-input
+                    v-model="form.lastLoginIp"
+                    placeholder="最后登录IP"
+                    disabled="disabled"
+                  />
+                </el-form-item>
+                <el-form-item
+                  v-if="form.id !== undefined"
+                  label="最后登录时间"
+                  prop="lastLoginTime"
+                >
+                  <el-date-picker
+                    v-model="form.lastLoginTime"
+                    disabled="disabled"
+                    style="width: 185px"
+                    type="date"
+                    placeholder="选择日期"
+                  />
+                </el-form-item>
+                <el-form-item label="终端ip" prop="ipAddr">
+                  <el-input v-model="form.ipAddr" placeholder="终端ip" disabled="disabled"/>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -544,7 +572,7 @@
         </el-dialog>
         <el-dialog title="用户详情" :visible.sync="isDetails" width="90%">
           <div>
-            <userDetail :form="objDetails" :list="subUserList" />
+            <userDetail :form="objDetails" :list="subUserList"/>
           </div>
           <div slot="footer" class="dialog-footer">
             <el-button @click="cancel">返回</el-button>
@@ -553,7 +581,7 @@
 
         <el-dialog title="子用户" :visible.sync="isSub" width="90%">
           <div>
-            <accounts :list="subUserList" />
+            <accounts :list="subUserList"/>
           </div>
           <div slot="footer" class="dialog-footer">
             <el-button @click="cancel">返回</el-button>
@@ -574,8 +602,8 @@ import {
   findSubUser
 } from '@/api/admin/app-user'
 
-import { listAppRole } from '@/api/admin/app-role'
-import { listAppVip } from '@/api/admin/app-vip'
+import {listAppRole} from '@/api/admin/app-role'
+import {listAppVip} from '@/api/admin/app-vip'
 import userDetail from './user_detail.vue'
 import accounts from './accounts.vue'
 
@@ -672,22 +700,22 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        uName: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
-        phone: [{ required: true, message: '手机号不能为空', trigger: 'blur' }],
-        sex: [{ required: true, message: '性别不能为空', trigger: 'blur' }],
+        uName: [{required: true, message: '用户名不能为空', trigger: 'blur'}],
+        phone: [{required: true, message: '手机号不能为空', trigger: 'blur'}],
+        sex: [{required: true, message: '性别不能为空', trigger: 'blur'}],
         regDevice: [
-          { required: true, message: '注册设备不能为空', trigger: 'blur' }
+          {required: true, message: '注册设备不能为空', trigger: 'blur'}
         ],
         isReal: [
-          { required: true, message: '是否实名不能为空', trigger: 'blur' }
+          {required: true, message: '是否实名不能为空', trigger: 'blur'}
         ],
-        rid: [{ required: true, message: '用户类型不能为空', trigger: 'blur' }],
-        vid: [{ required: true, message: 'vip类型不能为空', trigger: 'blur' }],
+        rid: [{required: true, message: '用户类型不能为空', trigger: 'blur'}],
+        vid: [{required: true, message: 'vip类型不能为空', trigger: 'blur'}],
         state: [
-          { required: true, message: '账号状态不能为空', trigger: 'blur' }
+          {required: true, message: '账号状态不能为空', trigger: 'blur'}
         ],
         isVirtualOptions: [
-          { required: true, message: '账号状态不能为空', trigger: 'blur' }
+          {required: true, message: '账号状态不能为空', trigger: 'blur'}
         ]
       }
     }
@@ -713,7 +741,7 @@ export default {
       )
     },
     getSubList(id) {
-      findSubUser({ id: id }).then(
+      findSubUser({id: id}).then(
         (response) => {
           this.subUserList = response.data
           this.isSub = true
@@ -764,11 +792,11 @@ export default {
       }
       return ''
     },
-    getImgList: function() {
+    getImgList: function () {
       this.form[this.fileIndex] =
         this.$refs['fileChoose'].resultList[0].fullUrl
     },
-    fileClose: function() {
+    fileClose: function () {
       this.fileOpen = false
     },
     sexFormat(row) {
@@ -854,7 +882,7 @@ export default {
       })
     },
     /** 提交按钮 */
-    submitForm: function() {
+    submitForm: function () {
       this.$refs['form'].validate((valid) => {
         const obj = JSON.parse(JSON.stringify(this.form))
         obj.rid = parseInt(this.form.rid)
@@ -892,8 +920,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       })
-        .then(function() {
-          return updateAppUserState({ id: row.id })
+        .then(function () {
+          return updateAppUserState({id: row.id})
         })
         .then((response) => {
           if (response.code === 200) {
@@ -904,7 +932,8 @@ export default {
             this.msgError(response.msg)
           }
         })
-        .catch(function() {})
+        .catch(function () {
+        })
     }
   }
 }
