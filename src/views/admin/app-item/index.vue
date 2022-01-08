@@ -203,6 +203,16 @@
                 <el-form-item label="备注" prop="remake">
                   <el-input type="textarea" v-model="form.remake" placeholder="备注" style="width: 180px"></el-input>
                 </el-form-item>
+                <el-form-item label="项目状态" prop="isRebateState">
+                  <el-radio-group v-model="form.state">
+                    <el-radio
+                      v-for="dict in isRebateStateOptions"
+                      :key="parseInt(dict.value)"
+                      :label="parseInt(dict.value)"
+                    >{{ dict.label }}
+                    </el-radio>
+                  </el-radio-group>
+                </el-form-item>
               </el-col>
               <el-col :span="18">
                 <el-col :span="12" v-for="(col, i) in [0,1,2,3]">
@@ -364,6 +374,7 @@ export default {
         platformDiscount: undefined,
         isRebateState: undefined,
         itemRebate: undefined,
+        state: undefined,
         itemType: undefined,
         itemCity: undefined,
         remake: undefined,
