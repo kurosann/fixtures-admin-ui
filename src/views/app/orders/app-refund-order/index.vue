@@ -3,7 +3,7 @@
     <BasicLayout>
         <template #wrapper>
             <el-card class="box-card">
-                <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
+                <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="80px">
                     <el-form-item label="订单Id" prop="orderNo"><el-input v-model="queryParams.orderNo" placeholder="请输入订单Id" clearable
                                               size="small" @keyup.enter.native="handleQuery"/>
                             </el-form-item>
@@ -22,7 +22,7 @@
                         <el-form-item label="退款时间" prop="refundTime"><el-input v-model="queryParams.refundTime" placeholder="请输入退款时间" clearable
                                               size="small" @keyup.enter.native="handleQuery"/>
                             </el-form-item>
-                        
+
                     <el-form-item>
                         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
                         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -65,25 +65,25 @@
                 </el-row>
 
                 <el-table v-loading="loading" :data="appRefundOrderList" @selection-change="handleSelectionChange">
-                    <el-table-column type="selection" width="55" align="center"/><el-table-column label="订单Id" align="center" prop="orderNo"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="平台承担" align="center" prop="platformBear"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="第三方承担" align="center" prop="otherBear"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="含退款结算金" align="center" prop="refundBalance"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="不含退款结算金" align="center" prop="onRefundBalance"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="合作公司单号" align="center" prop="cooperativeNo"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="退款流水单号" align="center" prop="refundSerialNo"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="完成时间" align="center" prop="completeTime"
+                    <el-table-column type="selection" width="55" align="center"/><el-table-column label="订单Id" align="center" prop="orderNo" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="平台承担" align="center" prop="platformBear" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="第三方承担" align="center" prop="otherBear" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="含退款结算金" align="center" prop="refundBalance" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="不含退款结算金" align="center" prop="onRefundBalance" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="合作公司单号" align="center" prop="cooperativeNo" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="退款流水单号" align="center" prop="refundSerialNo" width="120"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="完成时间" align="center" prop="completeTime" width="150"
                                                  :show-overflow-tooltip="true">
                                     <template slot-scope="scope">
                                     <span>{{ parseTime(scope.row.completeTime) }}</span>
                                     </template>
-                                </el-table-column><el-table-column label="退款时间" align="center" prop="refundTime"
+                                </el-table-column><el-table-column label="退款时间" align="center" prop="refundTime" width="150"
                                                  :show-overflow-tooltip="true">
                                     <template slot-scope="scope">
                                     <span>{{ parseTime(scope.row.refundTime) }}</span>
                                     </template>
                                 </el-table-column>
-                    <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+                    <el-table-column label="操作" align="center"  fixed="right" class-name="small-padding fixed-width" width="120">
                         <template slot-scope="scope">
                          <el-popconfirm
                            class="delete-popconfirm"
@@ -130,7 +130,7 @@
                 <!-- 添加或修改对话框 -->
                 <el-dialog :title="title" :visible.sync="open" width="500px">
                     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                        
+
                                     <el-form-item label="订单Id" prop="orderNo">
                                         <el-input v-model="form.orderNo" placeholder="订单Id"
                                                       />
@@ -186,7 +186,7 @@
 
 <script>
     import {addAppRefundOrder, delAppRefundOrder, getAppRefundOrder, listAppRefundOrder, updateAppRefundOrder} from '@/api/admin/app-refund-order'
-    
+
     export default {
         name: 'AppRefundOrder',
         components: {
@@ -211,9 +211,9 @@
                 // 类型数据字典
                 typeOptions: [],
                 appRefundOrderList: [],
-                
+
                 // 关系表类型
-                
+
                 // 查询参数
                 queryParams: {
                     pageIndex: 1,
@@ -224,7 +224,7 @@
                     refundSerialNo:undefined,
                     completeTime:undefined,
                     refundTime:undefined,
-                    
+
                 },
                 // 表单参数
                 form: {
@@ -261,7 +261,7 @@
             // 表单重置
             reset() {
                 this.form = {
-                
+
                 id: undefined,
                 orderNo: undefined,
                 platformBear: undefined,

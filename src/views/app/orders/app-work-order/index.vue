@@ -2,41 +2,41 @@
   <BasicLayout>
     <template #wrapper>
       <el-card class="box-card">
-        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
+        <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="70px">
           <el-form-item label="订单ID" prop="orderNo">
-            <el-input v-model="queryParams.orderNo" placeholder="请输入订单ID" clearable
+            <el-input v-model="queryParams.orderNo" placeholder="请输入订单ID" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="顾客" prop="customer">
-            <el-input v-model="queryParams.customer" placeholder="请输入顾客" clearable
+            <el-input v-model="queryParams.customer" placeholder="请输入顾客" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="师傅" prop="masterId">
-            <el-input v-model="queryParams.masterId" placeholder="请输入师傅" clearable
+            <el-input v-model="queryParams.masterId" placeholder="请输入师傅" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="处理时间" prop="dealTime">
-            <el-input v-model="queryParams.dealTime" placeholder="请输入处理时间" clearable
+            <el-input v-model="queryParams.dealTime" placeholder="请输入处理时间" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="估值" prop="valuation">
-            <el-input v-model="queryParams.valuation" placeholder="请输入估值" clearable
+            <el-input v-model="queryParams.valuation" placeholder="请输入估值" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="流水号" prop="orderFlow">
-            <el-input v-model="queryParams.orderFlow" placeholder="请输入单笔订单流水号" clearable
+            <el-input v-model="queryParams.orderFlow" placeholder="请输入单笔订单流水号" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="实际付款" prop="realPlay">
-            <el-input v-model="queryParams.realPlay" placeholder="请输入实际付款" clearable
+            <el-input v-model="queryParams.realPlay" placeholder="请输入实际付款" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="应付款" prop="shouldPlay">
-            <el-input v-model="queryParams.shouldPlay" placeholder="请输入应付款" clearable
+            <el-input v-model="queryParams.shouldPlay" placeholder="请输入应付款" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="交易类型" prop="dealType">
-            <el-select v-model="queryParams.dealType"
+            <el-select v-model="queryParams.dealType"  style="width: 180px"
                        placeholder="工程订单交易类型" clearable size="small">
               <el-option
                 v-for="dict in dealTypeOptions"
@@ -47,15 +47,15 @@
             </el-select>
           </el-form-item>
           <el-form-item label="付款凭据" prop="playProof">
-            <el-input v-model="queryParams.playProof" placeholder="请输入付款凭据" clearable
+            <el-input v-model="queryParams.playProof" placeholder="请输入付款凭据" clearable  style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="完成时间" prop="completeTime">
-            <el-input v-model="queryParams.completeTime" placeholder="请输入完成时间" clearable
+            <el-input v-model="queryParams.completeTime" placeholder="请输入完成时间" clearable  style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="订单状态" prop="state">
-            <el-select v-model="queryParams.state"
+            <el-select v-model="queryParams.state"  style="width: 180px"
                        placeholder="工程订单订单状态" clearable size="small">
               <el-option
                 v-for="dict in stateOptions"
@@ -66,7 +66,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="售后状态" prop="afterState">
-            <el-select v-model="queryParams.afterState"
+            <el-select v-model="queryParams.afterState"  style="width: 180px"
                        placeholder="工程订单售后状态" clearable size="small">
               <el-option
                 v-for="dict in afterStateOptions"
