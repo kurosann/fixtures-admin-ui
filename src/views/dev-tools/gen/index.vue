@@ -109,34 +109,41 @@
                 icon="el-icon-view"
                 @click="handlePreview(scope.row)"
               >预览</el-button>
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="正在使用代码生成请确认?"
-                confirm-button-text="生成"
-                @onConfirm="handleToProject(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  type="text"
-                  size="small"
-                  icon="el-icon-view"
-                >代码生成</el-button>
-              </el-popconfirm>
-
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="正在使用【菜单以及API生成到数据库】请确认?"
-                confirm-button-text="写入DB"
-                @onConfirm="handleToDB(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  type="text"
-                  size="small"
-                  icon="el-icon-view"
-                >生成配置</el-button>
-              </el-popconfirm>
-
+<!--              <el-popconfirm-->
+<!--                class="delete-popconfirm"-->
+<!--                title="正在使用代码生成请确认?"-->
+<!--                confirm-button-text="生成"-->
+<!--                @onConfirm="handleToProject(scope.row)"-->
+<!--              >-->
+<!--               -->
+<!--              </el-popconfirm>-->
+              <el-button
+                slot="reference"
+                type="text"
+                size="small"
+                icon="el-icon-view"
+                @click="handleToProject(scope.row)"
+              >代码生成</el-button>
+<!--              <el-popconfirm-->
+<!--                class="delete-popconfirm"-->
+<!--                title="正在使用【菜单以及API生成到数据库】请确认?"-->
+<!--                confirm-button-text="写入DB"-->
+<!--                @onConfirm="handleToDB(scope.row)"-->
+<!--              >-->
+<!--                <el-button-->
+<!--                  slot="reference"-->
+<!--                  type="text"-->
+<!--                  size="small"-->
+<!--                  icon="el-icon-view"-->
+<!--                >生成配置</el-button>-->
+<!--              </el-popconfirm>-->
+              <el-button
+                slot="reference"
+                type="text"
+                size="small"
+                icon="el-icon-view"
+                @click="handleToDB(scope.row)"
+              >生成配置</el-button>
               <el-popconfirm
                 class="delete-popconfirm"
                 title="正在使用代码生成配置迁移脚本请确认?"

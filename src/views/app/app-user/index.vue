@@ -10,7 +10,7 @@
         >
           <el-form-item label="用户名" prop="uName">
             <el-input
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.uName"
               placeholder="请输入用户名"
               clearable
@@ -20,7 +20,7 @@
           </el-form-item>
           <el-form-item label="手机号" prop="phone">
             <el-input
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.phone"
               placeholder="请输入手机号"
               clearable
@@ -31,7 +31,7 @@
 
           <el-form-item label="邀请码" prop="invitationCode">
             <el-input
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.invitationCode"
               placeholder="输入邀请码"
               clearable
@@ -41,7 +41,7 @@
           </el-form-item>
           <el-form-item label="注册设备" prop="regDevice">
             <el-input
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.regDevice"
               placeholder="注册设备"
               clearable
@@ -51,7 +51,7 @@
           </el-form-item>
           <el-form-item label="性别" prop="sex">
             <el-select
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.sex"
               placeholder="用户性别"
               clearable
@@ -67,7 +67,7 @@
           </el-form-item>
           <el-form-item label="是否实名" prop="isReal">
             <el-select
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.isReal"
               placeholder="是否实名"
               clearable
@@ -83,7 +83,7 @@
           </el-form-item>
           <el-form-item label="用户类型" prop="rid">
             <el-select
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.rid"
               placeholder="请选择"
               clearable
@@ -99,7 +99,7 @@
           </el-form-item>
           <el-form-item label="vip类型" prop="vid">
             <el-select
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.vid"
               placeholder="请选择"
               clearable
@@ -115,7 +115,7 @@
           </el-form-item>
           <el-form-item label="账号状态" prop="state">
             <el-select
-              style="width: 150px"
+              style="width: 180px"
               v-model="queryParams.state"
               placeholder="请选择"
               clearable
