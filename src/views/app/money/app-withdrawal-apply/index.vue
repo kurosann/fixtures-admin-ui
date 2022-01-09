@@ -98,36 +98,46 @@
                            :show-overflow-tooltip="true"/>
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="120">
             <template slot-scope="scope">
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要修改吗?"
-                confirm-button-text="修改"
-                @onConfirm="handleUpdate(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appWithdrawalApply:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-edit"
-                >修改
-                </el-button>
-              </el-popconfirm>
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要删除吗?"
-                confirm-button-text="删除"
-                @onConfirm="handleDelete(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appWithdrawalApply:remove']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-delete"
-                >删除
-                </el-button>
-              </el-popconfirm>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appWithdrawalApply:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-check"
+                @click="handleUpdate(scope.row,2)"
+                v-if="scope.row.state===1"
+              >通过
+              </el-button>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appWithdrawalApply:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-close"
+                @click="handleUpdate(scope.row,3)"
+                v-if="scope.row.state===1"
+              >拒绝
+              </el-button>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appWithdrawalApply:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-s-promotion"
+                @click="handleUpdate(scope.row,4)"
+                v-if=" scope.row.state===1 "
+              >上传凭证
+              </el-button>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appWithdrawalApply:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-s-promotion"
+                @click="handleUpdate(scope.row,5)"
+                v-if="(scope.row.state === 3 && scope.row.state !== 4)"
+              >发送
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -141,64 +151,84 @@
         />
 
         <!-- 添加或修改对话框 -->
-        <el-dialog :title="title" :visible.sync="open" width="500px">
-          <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <!--        <el-dialog :title="title" :visible.sync="open" width="500px">-->
+        <!--          <el-form ref="form" :model="form" :rules="rules" label-width="80px">-->
 
-            <el-form-item label="申请单号" prop="applyNo">
-              <el-input v-model="form.applyNo" placeholder="申请单号"
-              />
-            </el-form-item>
-            <el-form-item label="用户Id" prop="userId">
-              <el-input v-model="form.userId" placeholder="用户Id"
-              />
-            </el-form-item>
-            <el-form-item label="收款方式" prop="receiverWay">
-              <el-select v-model="form.receiverWay"
-                         placeholder="请选择">
-                <el-option
-                  v-for="dict in receiverWayOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="收款账户" prop="receiverAccount">
-              <el-input v-model="form.receiverAccount" placeholder="收款账户"
-              />
-            </el-form-item>
-            <el-form-item label="平台承担" prop="platformBear">
-              <el-input v-model="form.platformBear" placeholder="平台承担"
-              />
-            </el-form-item>
-            <el-form-item label="第三方承担" prop="otherBear">
-              <el-input v-model="form.otherBear" placeholder="第三方承担"
-              />
-            </el-form-item>
-            <el-form-item label="金额" prop="amount">
-              <el-input v-model="form.amount" placeholder="金额"
-              />
-            </el-form-item>
-            <el-form-item label="审核状态" prop="state">
-              <el-select v-model="form.state"
-                         placeholder="请选择">
-                <el-option
-                  v-for="dict in stateOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="交易凭据" prop="txProofUrl">
-              <el-input v-model="form.txProofUrl" placeholder="交易凭据"
-              />
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="submitForm">确 定</el-button>
-            <el-button @click="cancel">取 消</el-button>
-          </div>
+        <!--            <el-form-item label="申请单号" prop="applyNo">-->
+        <!--              <el-input v-model="form.applyNo" placeholder="申请单号"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="用户Id" prop="userId">-->
+        <!--              <el-input v-model="form.userId" placeholder="用户Id"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="收款方式" prop="receiverWay">-->
+        <!--              <el-select v-model="form.receiverWay"-->
+        <!--                         placeholder="请选择">-->
+        <!--                <el-option-->
+        <!--                  v-for="dict in receiverWayOptions"-->
+        <!--                  :key="dict.value"-->
+        <!--                  :label="dict.label"-->
+        <!--                  :value="dict.value"-->
+        <!--                />-->
+        <!--              </el-select>-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="收款账户" prop="receiverAccount">-->
+        <!--              <el-input v-model="form.receiverAccount" placeholder="收款账户"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="平台承担" prop="platformBear">-->
+        <!--              <el-input v-model="form.platformBear" placeholder="平台承担"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="第三方承担" prop="otherBear">-->
+        <!--              <el-input v-model="form.otherBear" placeholder="第三方承担"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="金额" prop="amount">-->
+        <!--              <el-input v-model="form.amount" placeholder="金额"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="审核状态" prop="state">-->
+        <!--              <el-select v-model="form.state"-->
+        <!--                         placeholder="请选择">-->
+        <!--                <el-option-->
+        <!--                  v-for="dict in stateOptions"-->
+        <!--                  :key="dict.value"-->
+        <!--                  :label="dict.label"-->
+        <!--                  :value="dict.value"-->
+        <!--                />-->
+        <!--              </el-select>-->
+        <!--            </el-form-item>-->
+        <!--            <el-form-item label="交易凭据" prop="txProofUrl">-->
+        <!--              <el-input v-model="form.txProofUrl" placeholder="交易凭据"-->
+        <!--              />-->
+        <!--            </el-form-item>-->
+        <!--          </el-form>-->
+        <!--          <div slot="footer" class="dialog-footer">-->
+        <!--            <el-button type="primary" @click="submitForm">确 定</el-button>-->
+        <!--            <el-button @click="cancel">取 消</el-button>-->
+        <!--          </div>-->
+        <!--        </el-dialog>-->
+
+        <el-dialog :title="title" :visible.sync="open" width="500px">
+          <el-upload
+            class="avatar-uploader"
+            :data="{type:'1'}"
+            name="file"
+            :headers="{Authorization:authorization}"
+            :action="url"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+
+            <img v-if="imageUrl!== ''" :src="imageUrl" class="avatar" alt="">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="open = false">取 消</el-button>
+            <el-button type="primary" @click="open = false">确 定</el-button>
+          </span>
         </el-dialog>
       </el-card>
     </template>
@@ -213,14 +243,19 @@ import {
   listAppWithdrawalApply,
   updateAppWithdrawalApply
 } from '@/api/admin/app-withdrawal-apply'
-
+import {getToken} from '@/utils/auth'
 export default {
   name: 'AppWithdrawalApply',
   components: {},
   data() {
     return {
+      url: process.env.VUE_APP_BASE_API + "/api/v1/public/uploadFile",
+      dialogImageUrl: '',
+      dialogVisible: false,
+      disabled: false,
       // 遮罩层
       loading: true,
+      imageUrl: "",
       // 选中数组
       ids: [],
       // 非单个禁用
@@ -230,7 +265,7 @@ export default {
       // 总条数
       total: 0,
       // 弹出层标题
-      title: '',
+      title: '上传交易凭据',
       // 是否显示弹出层
       open: false,
       isEdit: false,
@@ -271,6 +306,7 @@ export default {
     }
   },
   created() {
+    this.authorization = 'Bearer ' + getToken()
     this.getList()
     this.getDicts('pay_way').then(response => {
       this.receiverWayOptions = response.data
@@ -312,6 +348,32 @@ export default {
       }
       this.resetForm('form')
     },
+    handleAvatarSuccess(res, file) {
+      if (res.code===200){
+        this.imageUrl = process.env.VUE_APP_BASE_API + "/" + res.data.full_path
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        });
+        // 更新请求
+        this.open = false
+        this.imageUrl = ''
+      }else {
+        this.imageUrl = ''
+        this.$message.error('上传失败');
+      }
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
     getImgList: function () {
       this.form[this.fileIndex] = this.$refs['fileChoose'].resultList[0].fullUrl
     },
@@ -351,16 +413,40 @@ export default {
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
-    handleUpdate(row) {
-      this.reset()
-      const id =
-        row.id || this.ids
-      getAppWithdrawalApply(id).then(response => {
-        this.form = response.data
+    // handleUpdate(row) {
+    //   this.reset()
+    //   const id =
+    //     row.id || this.ids
+    //   getAppWithdrawalApply(id).then(response => {
+    //     this.form = response.data
+    //     this.open = true
+    //     this.title = '修改用户提现申请'
+    //     this.isEdit = true
+    //   })
+    // },
+    handleUpdate(row, tag) {
+      //this.reset()
+      //const id = row.id
+      // 通过
+      if (tag === 2) {
+
+      }
+      // 拒绝
+      if (tag === 3) {
+
+      }
+      console.log(tag)
+      // 上传交易凭据
+      if (tag === 4) {
         this.open = true
-        this.title = '修改用户提现申请'
         this.isEdit = true
-      })
+      }
+
+      // 发送
+      if (tag === 5) {
+
+      }
+
     },
     /** 提交按钮 */
     submitForm: function () {
@@ -414,3 +500,28 @@ export default {
   }
 }
 </script>
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>

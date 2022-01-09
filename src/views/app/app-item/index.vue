@@ -4,19 +4,19 @@
       <el-card class="box-card">
         <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
           <el-form-item label="平台名称" prop="itemName">
-            <el-input v-model="queryParams.itemName" placeholder="请输入平台名称" clearable
+            <el-input v-model="queryParams.itemName" placeholder="请输入平台名称" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="简略标" prop="itemSimple">
-            <el-input v-model="queryParams.itemSimple" placeholder="请输入简略标" clearable
+            <el-input v-model="queryParams.itemSimple" placeholder="请输入简略标" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="平台补贴" prop="platformDiscount">
-            <el-input v-model="queryParams.platformDiscount" placeholder="请输入平台补贴" clearable
+            <el-input v-model="queryParams.platformDiscount" placeholder="请输入平台补贴" clearable style="width: 180px"
                       size="small" @keyup.enter.native="handleQuery"/>
           </el-form-item>
           <el-form-item label="部件类型" prop="itemType">
-            <el-select v-model="queryParams.itemType"
+            <el-select v-model="queryParams.itemType" style="width: 180px"
                        placeholder="材料管理部件类型" clearable size="small">
               <el-option
                 v-for="dict in itemTypeOptions"
