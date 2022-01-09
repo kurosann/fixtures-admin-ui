@@ -3,7 +3,7 @@
     <BasicLayout>
         <template #wrapper>
             <el-card class="box-card">
-                <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="80px">
+                <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="100px">
                     <el-form-item label="订单Id" prop="orderNo"><el-input v-model="queryParams.orderNo" placeholder="请输入订单Id" clearable
                                               size="small" @keyup.enter.native="handleQuery"/>
                             </el-form-item>
