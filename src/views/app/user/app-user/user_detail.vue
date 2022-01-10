@@ -49,9 +49,63 @@
             <el-tag type="warning" v-if="form.isVirtual === 1">{{ this.isVirtualFormat(form) }}</el-tag>
             <el-tag v-else >{{ this.isVirtualFormat(form) }}</el-tag>
           </span>
+          <el-divider></el-divider>
+          <span>工程订单数：
+            <el-tag type="success"">{{ this.list.length }}</el-tag>
+          </span>
         </div>
     </el-card>
 
+    <el-card>
+      <el-table
+        :data="list"
+        height="400"
+        stripe
+        style="width: 100%"
+      >
+        <el-table-column
+          label="订单号"
+          align="center"
+          prop="orderNo"
+          :show-overflow-tooltip="true"
+        />
+        <el-table-column
+          label="下单手机"
+          align="center"
+          prop="orderPhone"
+          :show-overflow-tooltip="true"
+        />
+        <el-table-column
+          label="下单用户"
+          align="center"
+          prop="userId"
+          :show-overflow-tooltip="true"
+        />
+        <el-table-column
+          label="工程人员"
+          align="center"
+          prop="masterId"
+          :show-overflow-tooltip="true"
+        />
+        <el-table-column
+          label="付款金额"
+          align="center"
+          prop="payAmount"
+          :show-overflow-tooltip="true"
+        />
+        <el-table-column
+          label="处理时间"
+          align="center"
+          prop="handle_time"
+          :formatter="ridFormat"
+          width="150"
+        >
+          <template slot-scope="scope">
+            {{ getTimes(scope.row.handle_time) }}
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
   </div>
 </template>
 
@@ -59,6 +113,7 @@
 import { listAppRole } from '@/api/admin/app-role'
 import { listAppVip } from '@/api/admin/app-vip'
 import moment from 'moment'
+import { listAppUser } from '@/api/admin/app-user'
 export default {
   name: 'UserDetail',
   // 方式2 :

@@ -60,7 +60,7 @@ export default {
       position: relative;
       overflow: hidden;
       width: 100%;
-      color: rgba(0, 0, 0, .45);
+      color: rgb(0, 0, 0);
       font-size: 14px;
       line-height: 22px;
     }

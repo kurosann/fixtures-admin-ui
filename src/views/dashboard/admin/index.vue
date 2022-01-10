@@ -1,60 +1,78 @@
 <template>
   <div class="dashboard-editor-container">
     <el-row :gutter="12">
-      <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card title="总销售额" total="￥126,560">
+      <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="今日订单总金额(元)" :total="'￥ '+ userStateObj.all_user">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
-          <div>
-            <trend flag="top" style="margin-right: 16px;" rate="12">
-              <span slot="term">周同比</span>
-            </trend>
-            <trend flag="bottom" rate="11">
-              <span slot="term">日同比</span>
-            </trend>
-          </div>
-          <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+          <template slot="footer"><br></template>
         </chart-card>
       </el-col>
-      <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card title="访问量" :total="8846">
+      <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="今日已支付(元)" :total="'￥ '+ userStateObj.all_user">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
-          <div>
-            <mini-area />
-          </div>
-          <template slot="footer">日访问量<span> {{ '1234' }}</span></template>
+          <template slot="footer">今日占比 <span style="color: #ffc30e">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
         </chart-card>
       </el-col>
-      <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card title="支付笔数" :total="6560">
+      <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="累计订单数" :total="userStateObj.all_user">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
-          <div>
-            <mini-bar />
-          </div>
-          <template slot="footer">转化率 <span>60%</span></template>
+          <template slot="footer"><br></template>
         </chart-card>
       </el-col>
-      <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card title="运营活动效果" total="78%">
+      <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="今日订单数" :total=" userStateObj.all_user">
+          <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
+            <i class="el-icon-warning-outline" />
+          </el-tooltip>
+          <template slot="footer">今日占本月比 <span style="color: #16ff0e">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
+        </chart-card>
+      </el-col>
+      <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="本月订单数" :total="userStateObj.all_user">
+          <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
+            <i class="el-icon-warning-outline" />
+          </el-tooltip>
+          <template slot="footer">本月占总比 <span style="color: #0e6cff">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
+        </chart-card>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="12">
+      <el-col :sm="24" :xs="24"  :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="累计会员数" :total="userStateObj.all_user">
+          <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
+            <i class="el-icon-warning-outline" />
+          </el-tooltip>
+          <template slot="footer"><br></template>
+        </chart-card>
+      </el-col>
+      <el-col :sm="24" :xs="24"  :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
+        <chart-card title="今日新增会员数" :total="userStateObj.today_add">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
           <div>
-            <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" height="8px" />
+            <el-progress :text-inside="true" :stroke-width="26" :percentage="userStateObj.today_add/userStateObj.all_user*100" ></el-progress>
           </div>
-          <template slot="footer">
-            <trend flag="top" style="margin-right: 16px;" rate="12">
-              <span slot="term">同周比</span>
-            </trend>
-            <trend flag="bottom" rate="80">
-              <span slot="term">日环比</span>
-            </trend>
-          </template>
+          <template slot="footer">今日新增占比 <span style="color: #0e6cff">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
+        </chart-card>
+      </el-col>
+      <el-col :sm="24" :xs="24"  :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px'}">
+        <chart-card title="拉黑名单" :total="userStateObj.black_num">
+          <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
+            <i class="el-icon-warning-outline" />
+          </el-tooltip>
+          <div>
+            <el-progress :text-inside="true" :stroke-width="20" :percentage="userStateObj.black_num/userStateObj.all_user*100" status="exception"></el-progress>
+<!--            <mini-progress color="rgb(254, 20, 87)" :target="100"  height="8px" />-->
+          </div>
+          <template slot="footer">拉黑名单占比 <span style="color: #C03639">{{userStateObj.black_num/userStateObj.all_user*100}}%</span></template>
         </chart-card>
       </el-col>
     </el-row>
@@ -62,23 +80,10 @@
     <el-card :bordered="false" :body-style="{padding: '0'}">
       <div class="salesCard">
         <el-tabs>
-          <el-tab-pane label="销售额">
+          <el-tab-pane label="处理订单数据">
             <el-row>
-              <el-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar :list="barData" title="销售额排行" />
-              </el-col>
-              <el-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList" />
-              </el-col>
-            </el-row>
-          </el-tab-pane>
-          <el-tab-pane label="访问量">
-            <el-row>
-              <el-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar :list="barData2" title="销售额趋势" />
-              </el-col>
-              <el-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList" />
+              <el-col :sm="6" :xs="6" :md="4" :xl="2" :lg="4" :style="{ marginBottom: '12px' }">
+                <chart-card title="累计订单数" :total="userStateObj.all_user"/>
               </el-col>
             </el-row>
           </el-tab-pane>
@@ -97,7 +102,7 @@ import MiniBar from '@/components/MiniBar'
 import MiniProgress from '@/components/MiniProgress'
 import RankList from '@/components/RankList/index'
 import Bar from '@/components/Bar.vue'
-
+import {GetUserStateNum} from '@/api/admin/app-user'
 const barData = []
 const barData2 = []
 for (let i = 0; i < 12; i += 1) {
@@ -132,12 +137,23 @@ export default {
   },
   data() {
     return {
+      userStateObj:{},
       barData,
       barData2,
       rankList
     }
   },
+  mounted() {
+    this.getUserState()
+  },
   methods: {
+    getUserState(){
+      GetUserStateNum().then(
+        (response) => {
+          this.userStateObj = response.data
+        }
+      )
+    }
   }
 }
 </script>

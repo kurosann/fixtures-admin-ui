@@ -572,7 +572,7 @@
         </el-dialog>
         <el-dialog title="用户详情" :visible.sync="isDetails" width="90%">
           <div>
-            <userDetail :form="objDetails" :list="subUserList"/>
+            <userDetail :form="objDetails" :list="orderList"/>
           </div>
           <div slot="footer" class="dialog-footer">
             <el-button @click="cancel">返回</el-button>
@@ -599,7 +599,8 @@ import {
   listAppUser,
   updateAppUser,
   updateAppUserState,
-  findSubUser
+  findSubUser,
+  GetByOrder
 } from '@/api/admin/app-user'
 
 import {listAppRole} from '@/api/admin/app-role'
@@ -672,7 +673,7 @@ export default {
       // 关系表类型
       ridOptions: [],
       vidOptions: [],
-
+      orderList:[],
       // 查询参数
       queryParams: {
         pageIndex: 1,
@@ -864,11 +865,17 @@ export default {
       this.multiple = !selection.length
     },
     openDetail(row) {
-      this.isDetails = true
+      this.getOrderList(row.id)
       this.objDetails = row
     },
     openSub(row) {
       this.getSubList(row.id)
+    },
+    getOrderList(id){
+      GetByOrder({id:id}).then((response) => {
+        this.isDetails = true
+        this.orderList = response.data
+      })
     },
     /** 修改按钮操作 */
     handleUpdate(row) {

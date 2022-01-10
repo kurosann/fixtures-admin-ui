@@ -52,6 +52,22 @@ export function findSubUser(data) {
   })
 }
 
+// 查询子用户list
+export function GetByOrder(data) {
+  return request({
+    url: '/api/v1/app-user/user_order/' + data.id,
+    method: 'get'
+  })
+}
+
+// 查询子用户list
+export function GetUserStateNum() {
+  return request({
+    url: '/api/v1/app-user/state_num',
+    method: 'get'
+  })
+}
+
 // 删除AppUser
 export function delAppUser(data) {
   return request({
