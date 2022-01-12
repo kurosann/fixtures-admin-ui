@@ -16,6 +16,21 @@ export function getAppOrders (id) {
         method: 'get'
     })
 }
+// 查询getAppOrdersNums详细
+export function getAppOrdersNums () {
+    return request({
+        url: '/api/v1/app-orders/order_num',
+        method: 'get'
+    })
+}
+
+// 查询getAppOrdersNums详细
+export function getAppOrdersStateNums () {
+    return request({
+        url: '/api/v1/app-orders/state_num',
+        method: 'get'
+    })
+}
 
 
 // 新增AppOrders

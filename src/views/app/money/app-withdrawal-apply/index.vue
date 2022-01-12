@@ -125,7 +125,7 @@
                 type="text"
                 icon="el-icon-s-promotion"
                 @click="handleUpdate(scope.row,4)"
-                v-if=" scope.row.state===1 "
+                v-if=" scope.row.state === 2 "
               >上传凭证
               </el-button>
               <el-button
@@ -243,7 +243,9 @@ import {
   listAppWithdrawalApply,
   updateAppWithdrawalApply
 } from '@/api/admin/app-withdrawal-apply'
+import {appWalletWithdrawSuccess, appWalletWithdrawFail} from '@/api/admin/app-wallet'
 import {getToken} from '@/utils/auth'
+
 export default {
   name: 'AppWithdrawalApply',
   components: {},
@@ -349,7 +351,7 @@ export default {
       this.resetForm('form')
     },
     handleAvatarSuccess(res, file) {
-      if (res.code===200){
+      if (res.code === 200) {
         this.imageUrl = process.env.VUE_APP_BASE_API + "/" + res.data.full_path
         this.$message({
           message: '上传成功',
@@ -358,7 +360,7 @@ export default {
         // 更新请求
         this.open = false
         this.imageUrl = ''
-      }else {
+      } else {
         this.imageUrl = ''
         this.$message.error('上传失败');
       }
@@ -429,19 +431,45 @@ export default {
       //const id = row.id
       // 通过
       if (tag === 2) {
-
+        appWalletWithdrawSuccess(row).then(response => {
+          if (response.code===200) {
+            this.$message({
+              showClose: true,
+              message: '已经通过',
+              type: 'success'
+            });
+          }else {
+            this.$message({
+              showClose: true,
+              message: response.msg,
+              type: 'error'
+            });
+          }
+        })
       }
       // 拒绝
       if (tag === 3) {
-
+        appWalletWithdrawFail(row).then(response => {
+          if (response.code===200){
+            this.$message({
+              showClose: true,
+              message: '已经拒绝',
+              type: 'success'
+            });
+          }else {
+            this.$message({
+              showClose: true,
+              message: response.msg,
+              type: 'error'
+            });
+          }
+        })
       }
-      console.log(tag)
       // 上传交易凭据
       if (tag === 4) {
         this.open = true
         this.isEdit = true
       }
-
       // 发送
       if (tag === 5) {
 
@@ -508,9 +536,11 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .avatar-uploader .el-upload:hover {
   border-color: #409EFF;
 }
+
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -519,6 +549,7 @@ export default {
   line-height: 178px;
   text-align: center;
 }
+
 .avatar {
   width: 178px;
   height: 178px;

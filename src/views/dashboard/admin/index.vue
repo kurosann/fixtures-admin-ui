@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
     <el-row :gutter="12">
       <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
-        <chart-card title="今日订单总金额(元)" :total="'￥ '+ userStateObj.all_user">
+        <chart-card title="今日订单总金额(元)" :total="'￥ '+ orderStateNumsObj.today_all_money">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
@@ -10,15 +10,15 @@
         </chart-card>
       </el-col>
       <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
-        <chart-card title="今日已支付(元)" :total="'￥ '+ userStateObj.all_user">
+        <chart-card title="今日已支付(元)" :total="'￥ '+ orderStateNumsObj.today_pay_money">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
-          <template slot="footer">今日占比 <span style="color: #ffc30e">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
+          <template slot="footer">今日占比 <span style="color: #ffc30e">{{parseFloat(orderStateNumsObj.today_pay_money)/parseFloat(orderStateNumsObj.today_all_money)*100}}%</span></template>
         </chart-card>
       </el-col>
       <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
-        <chart-card title="累计订单数" :total="userStateObj.all_user">
+        <chart-card title="累计订单数" :total="orderStateNumsObj.all_day_add">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
@@ -26,19 +26,19 @@
         </chart-card>
       </el-col>
       <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
-        <chart-card title="今日订单数" :total=" userStateObj.all_user">
+        <chart-card title="今日订单数" :total=" orderStateNumsObj.today_add">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
-          <template slot="footer">今日占本月比 <span style="color: #16ff0e">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
+          <template slot="footer">今日占本月比 <span style="color: #16ff0e">{{orderStateNumsObj.today_add/orderStateNumsObj.today_mon*100}}%</span></template>
         </chart-card>
       </el-col>
       <el-col :sm="24" :xs="24" :md="4" :xl="4" :lg="4" :style="{ marginBottom: '12px' }">
-        <chart-card title="本月订单数" :total="userStateObj.all_user">
+        <chart-card title="本月订单数" :total="orderStateNumsObj.today_mon">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
-          <template slot="footer">本月占总比 <span style="color: #0e6cff">{{userStateObj.today_add/userStateObj.all_user*100}}%</span></template>
+          <template slot="footer">本月占总比 <span style="color: #0e6cff">{{orderStateNumsObj.today_mon/orderStateNumsObj.all_day_add*100}}%</span></template>
         </chart-card>
       </el-col>
     </el-row>
@@ -82,8 +82,23 @@
         <el-tabs>
           <el-tab-pane label="处理订单数据">
             <el-row>
-              <el-col :sm="6" :xs="6" :md="4" :xl="2" :lg="4" :style="{ marginBottom: '12px' }">
-                <chart-card title="累计订单数" :total="userStateObj.all_user"/>
+              <el-col :sm="3" :xs="3" :md="3" :xl="3" :lg="3" :style="{ marginLeft:'5px', marginBottom: '12px' }">
+                <chart-card title="正在派单" :total="orderNumsObj.dispatch"/>
+              </el-col>
+              <el-col :sm="3" :xs="3" :md="3" :xl="3" :lg="3" :style="{  marginLeft:'5px', marginBottom: '12px' }">
+                <chart-card title="人员已接单" :total="orderNumsObj.is_dispatch"/>
+              </el-col>
+              <el-col :sm="3" :xs="3"  :md="3" :xl="3" :lg="3" :style="{  marginLeft:'5px', marginBottom: '12px' }">
+                <chart-card title="订单完成" :total="orderNumsObj.ok_dispatch"/>
+              </el-col>
+              <el-col :sm="3" :xs="3"  :md="3" :xl="3" :lg="3" :style="{  marginLeft:'5px', marginBottom: '12px' }">
+                <chart-card title="订单取消" :total="orderNumsObj.order_cancel"/>
+              </el-col>
+              <el-col :sm="3" :xs="3"  :md="3" :xl="3" :lg="3" :style="{  marginLeft:'5px', marginBottom: '12px' }">
+                <chart-card title="待支付" :total="orderNumsObj.payment"/>
+              </el-col>
+              <el-col :sm="3" :xs="3"  :md="3" :xl="3" :lg="3" :style="{  marginLeft:'5px', marginBottom: '12px' }">
+                <chart-card title="支付成功" :total="orderNumsObj.pay_ok"/>
               </el-col>
             </el-row>
           </el-tab-pane>
@@ -103,6 +118,7 @@ import MiniProgress from '@/components/MiniProgress'
 import RankList from '@/components/RankList/index'
 import Bar from '@/components/Bar.vue'
 import {GetUserStateNum} from '@/api/admin/app-user'
+import {getAppOrdersNums,getAppOrdersStateNums} from '@/api/admin/app-orders'
 const barData = []
 const barData2 = []
 for (let i = 0; i < 12; i += 1) {
@@ -138,6 +154,8 @@ export default {
   data() {
     return {
       userStateObj:{},
+      orderNumsObj:{},
+      orderStateNumsObj:{},
       barData,
       barData2,
       rankList
@@ -145,12 +163,28 @@ export default {
   },
   mounted() {
     this.getUserState()
+    this.appOrdersNums()
+    this.getAppOrdersStateNums()
   },
   methods: {
     getUserState(){
       GetUserStateNum().then(
         (response) => {
           this.userStateObj = response.data
+        }
+      )
+    },
+    appOrdersNums(){
+      getAppOrdersNums().then(
+        (response) => {
+          this.orderNumsObj = response.data
+        }
+      )
+    },
+    getAppOrdersStateNums(){
+      getAppOrdersStateNums().then(
+        (response) => {
+          this.orderStateNumsObj = response.data
         }
       )
     }

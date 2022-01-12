@@ -1,5 +1,5 @@
 module.exports = {
-  title: '小球后台管理系统',
+  title: '小求后台管理系统',
 
   /**
    * @type {boolean} true | false

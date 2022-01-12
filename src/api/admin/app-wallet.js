@@ -27,11 +27,29 @@ export function addAppWallet(data) {
     })
 }
 
-// 修改AppWallet
+// 修改AppWallet/上传凭据
 export function updateAppWallet(data) {
     return request({
         url: '/api/v1/app-wallet/'+data.id,
         method: 'put',
+        data: data
+    })
+}
+
+// 审核通过
+export function appWalletWithdrawSuccess(data) {
+    return request({
+        url: '/api/v1/app-wallet/with-draw-success',
+      method: 'post',
+      data: data
+    })
+}
+
+// 审核拒绝
+export function appWalletWithdrawFail(data) {
+    return request({
+        url: '/api/v1/app-wallet/with-draw-fail',
+        method: 'post',
         data: data
     })
 }
