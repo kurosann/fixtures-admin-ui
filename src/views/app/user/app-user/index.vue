@@ -367,38 +367,26 @@
                 @click="openSub(scope.row)"
               >子用户
               </el-button>
-              <el-popconfirm
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appUser:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-user-solid"
                 v-if="scope.row.state === 1"
-                class="delete-popconfirm"
-                title="确认要拉黑吗?"
-                confirm-button-text="拉黑"
-                @onConfirm="handleDelete(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appUser:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-user-solid"
-                >拉黑
-                </el-button>
-              </el-popconfirm>
-              <el-popconfirm
+                @click="handleUserState(scope.row)"
+              >拉黑
+              </el-button>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appUser:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-user"
                 v-if="scope.row.state === 2"
-                class="delete-popconfirm"
-                title="确认要洗白吗?"
-                confirm-button-text="洗白"
-                @onConfirm="handleDelete(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appUser:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-user"
-                >洗白
-                </el-button>
-              </el-popconfirm>
+                @click="handleUserState(scope.row)"
+              >洗白
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -921,7 +909,7 @@ export default {
       })
     },
     /** 拉黑按钮操作 */
-    handleDelete(row) {
+    handleUserState(row) {
       this.$confirm('是否确认更改编号为"' + row.id + '"的数据项?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

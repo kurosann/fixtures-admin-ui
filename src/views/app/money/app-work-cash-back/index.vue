@@ -10,7 +10,7 @@
                         <el-form-item label="订单Id/工程单Id" prop="orderNo"><el-input v-model="queryParams.orderNo" placeholder="请输入订单Id/工程单Id" clearable
                                               size="small" @keyup.enter.native="handleQuery"/>
                             </el-form-item>
-                        
+
                     <el-form-item>
                         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
                         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -105,14 +105,14 @@
                 />
 
                 <!-- 添加或修改对话框 -->
-                <el-dialog :title="title" :visible.sync="open" width="500px">
-                    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                        
+                <el-dialog :title="title" :visible.sync="open" width="700px">
+                    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+
                                     <el-form-item label="用户Id" prop="userId">
                                         <el-input v-model="form.userId" placeholder="用户Id"
                                                       />
                                     </el-form-item>
-                                    <el-form-item label="订单Id/工程单Id" prop="orderNo">
+                                    <el-form-item label="订单Id" prop="orderNo">
                                         <el-input v-model="form.orderNo" placeholder="订单Id/工程单Id"
                                                       />
                                     </el-form-item>
@@ -145,7 +145,7 @@
 
 <script>
     import {addAppWorkCashBack, delAppWorkCashBack, getAppWorkCashBack, listAppWorkCashBack, updateAppWorkCashBack} from '@/api/admin/app-work-cash-back'
-    
+
     export default {
         name: 'AppWorkCashBack',
         components: {
@@ -170,16 +170,16 @@
                 // 类型数据字典
                 typeOptions: [],
                 appWorkCashBackList: [],
-                
+
                 // 关系表类型
-                
+
                 // 查询参数
                 queryParams: {
                     pageIndex: 1,
                     pageSize: 10,
                     userId:undefined,
                     orderNo:undefined,
-                    
+
                 },
                 // 表单参数
                 form: {
@@ -212,7 +212,7 @@
             // 表单重置
             reset() {
                 this.form = {
-                
+
                 id: undefined,
                 userId: undefined,
                 orderNo: undefined,

@@ -72,12 +72,12 @@
                                                  :show-overflow-tooltip="true"/><el-table-column label="不含退款结算金" align="center" prop="onRefundBalance" width="120"
                                                  :show-overflow-tooltip="true"/><el-table-column label="合作公司单号" align="center" prop="cooperativeNo" width="120"
                                                  :show-overflow-tooltip="true"/><el-table-column label="退款流水单号" align="center" prop="refundSerialNo" width="120"
-                                                 :show-overflow-tooltip="true"/><el-table-column label="完成时间" align="center" prop="completeTime" width="150"
+                                                 :show-overflow-tooltip="true"/><el-table-column label="完成时间" align="center" prop="completeTime"
                                                  :show-overflow-tooltip="true">
                                     <template slot-scope="scope">
                                     <span>{{ parseTime(scope.row.completeTime) }}</span>
                                     </template>
-                                </el-table-column><el-table-column label="退款时间" align="center" prop="refundTime" width="150"
+                                </el-table-column><el-table-column label="退款时间" align="center" prop="refundTime"
                                                  :show-overflow-tooltip="true">
                                     <template slot-scope="scope">
                                     <span>{{ parseTime(scope.row.refundTime) }}</span>
@@ -85,36 +85,24 @@
                                 </el-table-column>
                     <el-table-column label="操作" align="center"  fixed="right" class-name="small-padding fixed-width" width="120">
                         <template slot-scope="scope">
-                         <el-popconfirm
-                           class="delete-popconfirm"
-                           title="确认要修改吗?"
-                           confirm-button-text="修改"
-                           @onConfirm="handleUpdate(scope.row)"
-                         >
-                           <el-button
-                             slot="reference"
-                             v-permisaction="['admin:appRefundOrder:edit']"
-                             size="mini"
-                             type="text"
-                             icon="el-icon-edit"
-                           >修改
-                           </el-button>
-                         </el-popconfirm>
-                         <el-popconfirm
-                            class="delete-popconfirm"
-                            title="确认要删除吗?"
-                            confirm-button-text="删除"
-                            @onConfirm="handleDelete(scope.row)"
-                         >
-                            <el-button
-                              slot="reference"
-                              v-permisaction="['admin:appRefundOrder:remove']"
-                              size="mini"
-                              type="text"
-                              icon="el-icon-delete"
-                            >删除
-                            </el-button>
-                         </el-popconfirm>
+                          <el-button
+                            slot="reference"
+                            v-permisaction="['admin:appItem:edit']"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-edit"
+                            @click="handleUpdate(scope.row)"
+                          >修改
+                          </el-button>
+                          <el-button
+                            slot="reference"
+                            v-permisaction="['admin:appItem:remove']"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-delete"
+                            @click="handleDelete(scope.row)"
+                          >删除
+                          </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -128,8 +116,8 @@
                 />
 
                 <!-- 添加或修改对话框 -->
-                <el-dialog :title="title" :visible.sync="open" width="500px">
-                    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+                <el-dialog :title="title" :visible.sync="open" width="600px">
+                    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
 
                                     <el-form-item label="订单Id" prop="orderNo">
                                         <el-input v-model="form.orderNo" placeholder="订单Id"

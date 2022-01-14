@@ -149,68 +149,6 @@
           :limit.sync="queryParams.pageSize"
           @pagination="getList"
         />
-
-        <!-- 添加或修改对话框 -->
-        <!--        <el-dialog :title="title" :visible.sync="open" width="500px">-->
-        <!--          <el-form ref="form" :model="form" :rules="rules" label-width="80px">-->
-
-        <!--            <el-form-item label="申请单号" prop="applyNo">-->
-        <!--              <el-input v-model="form.applyNo" placeholder="申请单号"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="用户Id" prop="userId">-->
-        <!--              <el-input v-model="form.userId" placeholder="用户Id"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="收款方式" prop="receiverWay">-->
-        <!--              <el-select v-model="form.receiverWay"-->
-        <!--                         placeholder="请选择">-->
-        <!--                <el-option-->
-        <!--                  v-for="dict in receiverWayOptions"-->
-        <!--                  :key="dict.value"-->
-        <!--                  :label="dict.label"-->
-        <!--                  :value="dict.value"-->
-        <!--                />-->
-        <!--              </el-select>-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="收款账户" prop="receiverAccount">-->
-        <!--              <el-input v-model="form.receiverAccount" placeholder="收款账户"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="平台承担" prop="platformBear">-->
-        <!--              <el-input v-model="form.platformBear" placeholder="平台承担"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="第三方承担" prop="otherBear">-->
-        <!--              <el-input v-model="form.otherBear" placeholder="第三方承担"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="金额" prop="amount">-->
-        <!--              <el-input v-model="form.amount" placeholder="金额"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="审核状态" prop="state">-->
-        <!--              <el-select v-model="form.state"-->
-        <!--                         placeholder="请选择">-->
-        <!--                <el-option-->
-        <!--                  v-for="dict in stateOptions"-->
-        <!--                  :key="dict.value"-->
-        <!--                  :label="dict.label"-->
-        <!--                  :value="dict.value"-->
-        <!--                />-->
-        <!--              </el-select>-->
-        <!--            </el-form-item>-->
-        <!--            <el-form-item label="交易凭据" prop="txProofUrl">-->
-        <!--              <el-input v-model="form.txProofUrl" placeholder="交易凭据"-->
-        <!--              />-->
-        <!--            </el-form-item>-->
-        <!--          </el-form>-->
-        <!--          <div slot="footer" class="dialog-footer">-->
-        <!--            <el-button type="primary" @click="submitForm">确 定</el-button>-->
-        <!--            <el-button @click="cancel">取 消</el-button>-->
-        <!--          </div>-->
-        <!--        </el-dialog>-->
-
         <el-dialog :title="title" :visible.sync="open" width="500px">
           <el-upload
             class="avatar-uploader"
@@ -366,15 +304,11 @@ export default {
       }
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
       const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.$message.error('上传图片大小不能超过 2MB!');
       }
-      return isJPG && isLt2M;
+      return isLt2M;
     },
     getImgList: function () {
       this.form[this.fileIndex] = this.$refs['fileChoose'].resultList[0].fullUrl
@@ -438,6 +372,7 @@ export default {
               message: '已经通过',
               type: 'success'
             });
+            this.getList()
           }else {
             this.$message({
               showClose: true,
@@ -456,6 +391,7 @@ export default {
               message: '已经拒绝',
               type: 'success'
             });
+            this.getList()
           }else {
             this.$message({
               showClose: true,
@@ -472,7 +408,7 @@ export default {
       }
       // 发送
       if (tag === 5) {
-
+        this.getList()
       }
 
     },

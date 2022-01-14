@@ -5,39 +5,48 @@
         <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="70px">
           <el-form-item label="订单ID" prop="orderNo">
             <el-input v-model="queryParams.orderNo" placeholder="请输入订单ID" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="顾客" prop="customer">
             <el-input v-model="queryParams.customer" placeholder="请输入顾客" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="师傅" prop="masterId">
             <el-input v-model="queryParams.masterId" placeholder="请输入师傅" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="处理时间" prop="dealTime">
             <el-input v-model="queryParams.dealTime" placeholder="请输入处理时间" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="估值" prop="valuation">
             <el-input v-model="queryParams.valuation" placeholder="请输入估值" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="流水号" prop="orderFlow">
             <el-input v-model="queryParams.orderFlow" placeholder="请输入单笔订单流水号" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="实际付款" prop="realPlay">
             <el-input v-model="queryParams.realPlay" placeholder="请输入实际付款" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="应付款" prop="shouldPlay">
             <el-input v-model="queryParams.shouldPlay" placeholder="请输入应付款" clearable style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="交易类型" prop="dealType">
-            <el-select v-model="queryParams.dealType"  style="width: 180px"
-                       placeholder="工程订单交易类型" clearable size="small">
+            <el-select v-model="queryParams.dealType" style="width: 180px"
+                       placeholder="工程订单交易类型" clearable size="small"
+            >
               <el-option
                 v-for="dict in dealTypeOptions"
                 :key="dict.value"
@@ -47,16 +56,19 @@
             </el-select>
           </el-form-item>
           <el-form-item label="付款凭据" prop="playProof">
-            <el-input v-model="queryParams.playProof" placeholder="请输入付款凭据" clearable  style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+            <el-input v-model="queryParams.playProof" placeholder="请输入付款凭据" clearable style="width: 180px"
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="完成时间" prop="completeTime">
-            <el-input v-model="queryParams.completeTime" placeholder="请输入完成时间" clearable  style="width: 180px"
-                      size="small" @keyup.enter.native="handleQuery"/>
+            <el-input v-model="queryParams.completeTime" placeholder="请输入完成时间" clearable style="width: 180px"
+                      size="small" @keyup.enter.native="handleQuery"
+            />
           </el-form-item>
           <el-form-item label="订单状态" prop="state">
-            <el-select v-model="queryParams.state"  style="width: 180px"
-                       placeholder="工程订单订单状态" clearable size="small">
+            <el-select v-model="queryParams.state" style="width: 180px"
+                       placeholder="工程订单订单状态" clearable size="small"
+            >
               <el-option
                 v-for="dict in stateOptions"
                 :key="dict.value"
@@ -66,8 +78,9 @@
             </el-select>
           </el-form-item>
           <el-form-item label="售后状态" prop="afterState">
-            <el-select v-model="queryParams.afterState"  style="width: 180px"
-                       placeholder="工程订单售后状态" clearable size="small">
+            <el-select v-model="queryParams.afterState" style="width: 180px"
+                       placeholder="工程订单售后状态" clearable size="small"
+            >
               <el-option
                 v-for="dict in afterStateOptions"
                 :key="dict.value"
@@ -121,53 +134,76 @@
         <el-table v-loading="loading" :data="appWorkOrderList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55" align="center"/>
           <el-table-column label="订单ID" align="center" prop="orderNo"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
           <el-table-column label="顾客" align="center" prop="customer"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
           <el-table-column label="师傅" align="center" prop="masterId"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
 
           <el-table-column label="估值" align="center" prop="valuation"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
           <el-table-column label="流水号" align="center" prop="orderFlow" width="150"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
           <el-table-column label="实际付款" align="center" prop="realPlay"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
           <el-table-column label="应付款" align="center" prop="shouldPlay"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          />
           <el-table-column label="交易类型" align="center" prop="dealType"
-                           :formatter="dealTypeFormat" width="100">
+                           :formatter="dealTypeFormat" width="100"
+          >
             <template slot-scope="scope">
               {{ dealTypeFormat(scope.row) }}
             </template>
           </el-table-column>
           <el-table-column label="订单状态" align="center" prop="state"
-                           :formatter="stateFormat" width="100">
+                           :formatter="stateFormat" width="100"
+          >
             <template slot-scope="scope">
               {{ stateFormat(scope.row) }}
             </template>
           </el-table-column>
           <el-table-column label="售后状态" align="center" prop="afterState"
-                           :formatter="afterStateFormat" width="100">
+                           :formatter="afterStateFormat" width="100"
+          >
             <template slot-scope="scope">
               {{ afterStateFormat(scope.row) }}
             </template>
           </el-table-column>
           <el-table-column label="付款凭据" align="center" prop="playProof"
-                           :show-overflow-tooltip="true"/>
+                           :show-overflow-tooltip="true"
+          ><template slot-scope="scope">
+            <el-button
+              slot="reference"
+              size="mini"
+              type="text"
+              icon="el-icon-view"
+              @click="setImg(scope.row.playProof,'身份证A')"
+            >查看
+            </el-button>
+          </template>
+          </el-table-column>
           <el-table-column label="处理时间" align="center" prop="dealTime"
-                           :show-overflow-tooltip="true">
+                           :show-overflow-tooltip="true"
+          >
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.dealTime) }}</span>
             </template>
           </el-table-column>
           <el-table-column label="完成时间" align="center" prop="completeTime"
-                           :show-overflow-tooltip="true">
+                           :show-overflow-tooltip="true"
+          >
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.completeTime) }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right"  width="150">
+          <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="150">
             <template slot-scope="scope">
               <el-button
                 slot="reference"
@@ -200,14 +236,15 @@
         />
 
         <!-- 添加或修改对话框 -->
-        <el-dialog :title="title" :visible.sync="open" width="500px">
-          <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-dialog :title="title" :visible.sync="open" width="600px">
+          <el-form ref="form" :model="form" :rules="rules" label-width="100px">
 
             <el-form-item label="处理时间" prop="dealTime">
               <el-date-picker
                 v-model="form.dealTime"
                 type="datetime"
-                placeholder="选择日期">
+                placeholder="选择日期"
+              >
               </el-date-picker>
             </el-form-item>
             <el-form-item label="估值" prop="valuation">
@@ -224,51 +261,76 @@
             </el-form-item>
             <el-form-item label="交易类型" prop="dealType">
               <el-select v-model="form.dealType"
-                         placeholder="请选择">
+                         placeholder="请选择"
+              >
                 <el-option
                   v-for="dict in dealTypeOptions"
-                  :key="dict.value"
+                  :key="parseInt(dict.value)"
                   :label="dict.label"
-                  :value="dict.value"
+                  :value="parseInt(dict.value)"
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="付款凭据" prop="playProof">
-              <el-input v-model="form.playProof" placeholder="付款凭据"
+            <el-form-item label="订单流水号" prop="playProof">
+              <el-input v-model="form.orderFlow" placeholder="工程订单流水号"
               />
+            </el-form-item>
+            <el-form-item label="付款凭据" prop="playProof">
+              <el-upload
+                class="avatar-uploader"
+                :data="{type:'1',class:'playProof'}"
+                name="file"
+                :headers="{Authorization:authorization}"
+                :action="url"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload"
+              >
+                <img v-if="form.playProof !=='' " :src="form.playProof" class="avatar" alt="">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
             </el-form-item>
             <el-form-item label="完成时间" prop="completeTime">
               <el-date-picker
                 v-model="form.completeTime"
                 type="datetime"
-                placeholder="选择日期">
+                placeholder="选择日期"
+              >
               </el-date-picker>
             </el-form-item>
             <el-form-item label="订单状态" prop="state">
               <el-select v-model="form.state"
-                         placeholder="请选择">
+                         placeholder="请选择"
+              >
                 <el-option
                   v-for="dict in stateOptions"
-                  :key="dict.value"
+                  :key="parseInt(dict.value)"
                   :label="dict.label"
-                  :value="dict.value"
+                  :value="parseInt(dict.value)"
                 />
               </el-select>
             </el-form-item>
             <el-form-item label="售后状态" prop="afterState">
               <el-select v-model="form.afterState"
-                         placeholder="请选择">
+                         placeholder="请选择"
+              >
                 <el-option
                   v-for="dict in afterStateOptions"
-                  :key="dict.value"
+                  :key="parseInt(dict.value)"
                   :label="dict.label"
-                  :value="dict.value"
+                  :value="parseInt(dict.value)"
                 />
               </el-select>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button type="primary" @click="submitForm">确 定</el-button>
+            <el-button @click="cancel">取 消</el-button>
+          </div>
+        </el-dialog>
+        <el-dialog :title="ititle" :visible.sync="iopen" width="500px">
+          <img :src="img" width="100%" height="100%"/>
+          <div slot="footer" class="dialog-footer">
             <el-button @click="cancel">取 消</el-button>
           </div>
         </el-dialog>
@@ -285,12 +347,14 @@ import {
   listAppWorkOrder,
   updateAppWorkOrder
 } from '@/api/admin/app-work-order'
+import { getToken } from '@/utils/auth'
 
 export default {
   name: 'AppWorkOrder',
   components: {},
   data() {
     return {
+      url: process.env.VUE_APP_BASE_API + '/api/v1/public/uploadFile',
       // 遮罩层
       loading: true,
       // 选中数组
@@ -303,6 +367,9 @@ export default {
       total: 0,
       // 弹出层标题
       title: '',
+      img:'',
+      ititle:'',
+      iopen:false,
       // 是否显示弹出层
       open: false,
       isEdit: false,
@@ -328,30 +395,31 @@ export default {
         playProof: undefined,
         completeTime: undefined,
         state: undefined,
-        afterState: undefined,
+        afterState: undefined
 
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-        orderNo: [{required: true, message: '订单ID不能为空', trigger: 'blur'}],
-        customer: [{required: true, message: '顾客不能为空', trigger: 'blur'}],
-        masterId: [{required: true, message: '师傅不能为空', trigger: 'blur'}],
-        dealTime: [{required: true, message: '处理时间不能为空', trigger: 'blur'}],
-        valuation: [{required: true, message: '估值不能为空', trigger: 'blur'}],
-        orderFlow: [{required: true, message: '单笔订单流水号不能为空', trigger: 'blur'}],
-        realPlay: [{required: true, message: '实际付款不能为空', trigger: 'blur'}],
-        shouldPlay: [{required: true, message: '应付款不能为空', trigger: 'blur'}],
-        dealType: [{required: true, message: '交易类型不能为空', trigger: 'blur'}],
-        playProof: [{required: true, message: '付款凭据不能为空', trigger: 'blur'}],
-        completeTime: [{required: true, message: '完成时间不能为空', trigger: 'blur'}],
-        state: [{required: true, message: '订单状态不能为空', trigger: 'blur'}],
-        afterState: [{required: true, message: '售后状态不能为空', trigger: 'blur'}],
+        orderNo: [{ required: true, message: '订单ID不能为空', trigger: 'blur' }],
+        customer: [{ required: true, message: '顾客不能为空', trigger: 'blur' }],
+        masterId: [{ required: true, message: '师傅不能为空', trigger: 'blur' }],
+        dealTime: [{ required: true, message: '处理时间不能为空', trigger: 'blur' }],
+        valuation: [{ required: true, message: '估值不能为空', trigger: 'blur' }],
+        orderFlow: [{ required: true, message: '单笔订单流水号不能为空', trigger: 'blur' }],
+        realPlay: [{ required: true, message: '实际付款不能为空', trigger: 'blur' }],
+        shouldPlay: [{ required: true, message: '应付款不能为空', trigger: 'blur' }],
+        dealType: [{ required: true, message: '交易类型不能为空', trigger: 'blur' }],
+        playProof: [{ required: true, message: '付款凭据不能为空', trigger: 'blur' }],
+        completeTime: [{ required: true, message: '完成时间不能为空', trigger: 'blur' }],
+        state: [{ required: true, message: '订单状态不能为空', trigger: 'blur' }],
+        afterState: [{ required: true, message: '售后状态不能为空', trigger: 'blur' }]
       }
     }
   },
   created() {
+    this.authorization = 'Bearer ' + getToken()
     this.getList()
     this.getDicts('app_deal_type').then(response => {
       this.dealTypeOptions = response.data
@@ -374,9 +442,15 @@ export default {
         }
       )
     },
+    setImg(url, title) {
+      this.img = url
+      this.ititle = title
+      this.iopen = true
+    },
     // 取消按钮
     cancel() {
       this.open = false
+      this.iopen = false
       this.reset()
     },
     // 表单重置
@@ -392,14 +466,14 @@ export default {
         playProof: undefined,
         completeTime: undefined,
         state: undefined,
-        afterState: undefined,
+        afterState: undefined
       }
       this.resetForm('form')
     },
-    getImgList: function () {
+    getImgList: function() {
       this.form[this.fileIndex] = this.$refs['fileChoose'].resultList[0].fullUrl
     },
-    fileClose: function () {
+    fileClose: function() {
       this.fileOpen = false
     },
     dealTypeFormat(row) {
@@ -410,6 +484,25 @@ export default {
     },
     afterStateFormat(row) {
       return this.selectDictLabel(this.afterStateOptions, row.afterState)
+    },
+    handleAvatarSuccess(res, file) {
+      if (res.code === 200) {
+        this.form.playProof = process.env.VUE_APP_BASE_API + '/' + res.data.full_path
+        this.$message({
+          message: '上传成功',
+          type: 'success'
+        })
+      } else {
+        this.form.playProof = ''
+        this.$message.error('上传失败')
+      }
+    },
+    beforeAvatarUpload(file) {
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!')
+      }
+      return isLt2M
     },
     // 关系
     // 文件
@@ -450,7 +543,7 @@ export default {
       })
     },
     /** 提交按钮 */
-    submitForm: function () {
+    submitForm: function() {
       this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.id !== undefined) {
@@ -485,8 +578,8 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function () {
-        return delAppWorkOrder({'ids': Ids})
+      }).then(function() {
+        return delAppWorkOrder({ 'ids': Ids })
       }).then((response) => {
         if (response.code === 200) {
           this.msgSuccess(response.msg)
@@ -495,9 +588,37 @@ export default {
         } else {
           this.msgError(response.msg)
         }
-      }).catch(function () {
+      }).catch(function() {
       })
     }
   }
 }
 </script>
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+</style>

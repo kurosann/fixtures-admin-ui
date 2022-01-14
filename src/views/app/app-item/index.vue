@@ -102,36 +102,24 @@
                            :show-overflow-tooltip="true"/>
           <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right"  width="120">
             <template slot-scope="scope">
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要修改吗?"
-                confirm-button-text="修改"
-                @onConfirm="handleUpdate(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appItem:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-edit"
-                >修改
-                </el-button>
-              </el-popconfirm>
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要删除吗?"
-                confirm-button-text="删除"
-                @onConfirm="handleDelete(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appItem:remove']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-delete"
-                >删除
-                </el-button>
-              </el-popconfirm>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appItem:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                @click="handleUpdate(scope.row)"
+              >修改
+              </el-button>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appItem:remove']"
+                size="mini"
+                type="text"
+                icon="el-icon-delete"
+                @click="handleDelete(scope.row)"
+              >删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -542,15 +530,12 @@ export default {
       }
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
+
       const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
-      return isJPG && isLt2M;
+      return isLt2M;
     }
   }
 }

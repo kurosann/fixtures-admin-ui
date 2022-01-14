@@ -142,36 +142,24 @@
           </el-table-column>
           <el-table-column label="操作" align="center" fixed="right" class-name="small-padding fixed-width" width="120">
             <template slot-scope="scope">
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要修改吗?"
-                confirm-button-text="修改"
-                @onConfirm="handleUpdate(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appAfterOrder:edit']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-edit"
-                >修改
-                </el-button>
-              </el-popconfirm>
-              <el-popconfirm
-                class="delete-popconfirm"
-                title="确认要删除吗?"
-                confirm-button-text="删除"
-                @onConfirm="handleDelete(scope.row)"
-              >
-                <el-button
-                  slot="reference"
-                  v-permisaction="['admin:appAfterOrder:remove']"
-                  size="mini"
-                  type="text"
-                  icon="el-icon-delete"
-                >删除
-                </el-button>
-              </el-popconfirm>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appItem:edit']"
+                size="mini"
+                type="text"
+                icon="el-icon-edit"
+                @click="handleUpdate(scope.row)"
+              >修改
+              </el-button>
+              <el-button
+                slot="reference"
+                v-permisaction="['admin:appItem:remove']"
+                size="mini"
+                type="text"
+                icon="el-icon-delete"
+                @click="handleDelete(scope.row)"
+              >删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>

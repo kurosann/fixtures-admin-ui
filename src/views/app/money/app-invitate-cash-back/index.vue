@@ -13,7 +13,7 @@
                         <el-form-item label="返现原因" prop="reason"><el-input v-model="queryParams.reason" placeholder="请输入返现原因" clearable
                                               size="small" @keyup.enter.native="handleQuery"/>
                             </el-form-item>
-                        
+
                     <el-form-item>
                         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
                         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -62,36 +62,24 @@
                                                  :show-overflow-tooltip="true"/>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
-                         <el-popconfirm
-                           class="delete-popconfirm"
-                           title="确认要修改吗?"
-                           confirm-button-text="修改"
-                           @onConfirm="handleUpdate(scope.row)"
-                         >
-                           <el-button
-                             slot="reference"
-                             v-permisaction="['admin:appInvitateCashBack:edit']"
-                             size="mini"
-                             type="text"
-                             icon="el-icon-edit"
-                           >修改
-                           </el-button>
-                         </el-popconfirm>
-                         <el-popconfirm
-                            class="delete-popconfirm"
-                            title="确认要删除吗?"
-                            confirm-button-text="删除"
-                            @onConfirm="handleDelete(scope.row)"
-                         >
-                            <el-button
-                              slot="reference"
-                              v-permisaction="['admin:appInvitateCashBack:remove']"
-                              size="mini"
-                              type="text"
-                              icon="el-icon-delete"
-                            >删除
-                            </el-button>
-                         </el-popconfirm>
+                          <el-button
+                            slot="reference"
+                            v-permisaction="['admin:appItem:edit']"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-edit"
+                            @click="handleUpdate(scope.row)"
+                          >修改
+                          </el-button>
+                          <el-button
+                            slot="reference"
+                            v-permisaction="['admin:appItem:remove']"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-delete"
+                            @click="handleDelete(scope.row)"
+                          >删除
+                          </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -107,7 +95,7 @@
                 <!-- 添加或修改对话框 -->
                 <el-dialog :title="title" :visible.sync="open" width="500px">
                     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                        
+
                                     <el-form-item label="用户ID" prop="userId">
                                         <el-input v-model="form.userId" placeholder="用户ID"
                                                       />
@@ -133,7 +121,7 @@
 
 <script>
     import {addAppInvitateCashBack, delAppInvitateCashBack, getAppInvitateCashBack, listAppInvitateCashBack, updateAppInvitateCashBack} from '@/api/admin/app-invitate-cash-back'
-    
+
     export default {
         name: 'AppInvitateCashBack',
         components: {
@@ -158,9 +146,9 @@
                 // 类型数据字典
                 typeOptions: [],
                 appInvitateCashBackList: [],
-                
+
                 // 关系表类型
-                
+
                 // 查询参数
                 queryParams: {
                     pageIndex: 1,
@@ -168,7 +156,7 @@
                     userId:undefined,
                     money:undefined,
                     reason:undefined,
-                    
+
                 },
                 // 表单参数
                 form: {
@@ -202,7 +190,7 @@
             // 表单重置
             reset() {
                 this.form = {
-                
+
                 id: undefined,
                 userId: undefined,
                 money: undefined,

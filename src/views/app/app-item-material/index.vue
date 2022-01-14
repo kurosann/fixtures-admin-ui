@@ -4,7 +4,7 @@
         <template #wrapper>
             <el-card class="box-card">
                 <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-                    
+
                     <el-form-item>
                         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
                         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -50,36 +50,24 @@
                     <el-table-column type="selection" width="55" align="center"/>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template slot-scope="scope">
-                         <el-popconfirm
-                           class="delete-popconfirm"
-                           title="确认要修改吗?"
-                           confirm-button-text="修改"
-                           @onConfirm="handleUpdate(scope.row)"
-                         >
-                           <el-button
-                             slot="reference"
-                             v-permisaction="['admin:appItemMaterial:edit']"
-                             size="mini"
-                             type="text"
-                             icon="el-icon-edit"
-                           >修改
-                           </el-button>
-                         </el-popconfirm>
-                         <el-popconfirm
-                            class="delete-popconfirm"
-                            title="确认要删除吗?"
-                            confirm-button-text="删除"
-                            @onConfirm="handleDelete(scope.row)"
-                         >
-                            <el-button
-                              slot="reference"
-                              v-permisaction="['admin:appItemMaterial:remove']"
-                              size="mini"
-                              type="text"
-                              icon="el-icon-delete"
-                            >删除
-                            </el-button>
-                         </el-popconfirm>
+                          <el-button
+                            slot="reference"
+                            v-permisaction="['admin:appItem:edit']"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-edit"
+                            @click="handleUpdate(scope.row)"
+                          >修改
+                          </el-button>
+                          <el-button
+                            slot="reference"
+                            v-permisaction="['admin:appItem:remove']"
+                            size="mini"
+                            type="text"
+                            icon="el-icon-delete"
+                            @click="handleDelete(scope.row)"
+                          >删除
+                          </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -95,7 +83,7 @@
                 <!-- 添加或修改对话框 -->
                 <el-dialog :title="title" :visible.sync="open" width="500px">
                     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                        
+
                                     <el-form-item label="项目Id" prop="itemId">
                                         <el-input v-model="form.itemId" placeholder="项目Id"
                                                       />
@@ -117,7 +105,7 @@
 
 <script>
     import {addAppItemMaterial, delAppItemMaterial, getAppItemMaterial, listAppItemMaterial, updateAppItemMaterial} from '@/api/admin/app-item-material'
-    
+
     export default {
         name: 'AppItemMaterial',
         components: {
@@ -142,14 +130,14 @@
                 // 类型数据字典
                 typeOptions: [],
                 appItemMaterialList: [],
-                
+
                 // 关系表类型
-                
+
                 // 查询参数
                 queryParams: {
                     pageIndex: 1,
                     pageSize: 10,
-                    
+
                 },
                 // 表单参数
                 form: {
@@ -180,7 +168,7 @@
             // 表单重置
             reset() {
                 this.form = {
-                
+
                 id: undefined,
                 itemId: undefined,
                 materialName: undefined,
