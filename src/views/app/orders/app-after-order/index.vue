@@ -173,8 +173,8 @@
         />
 
         <!-- 添加或修改对话框 -->
-        <el-dialog :title="title" :visible.sync="open" width="500px">
-          <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-dialog :title="title" :visible.sync="open" width="90%">
+          <el-form ref="form" :model="form" :rules="rules" :inline="true" label-width="100px">
 
             <el-form-item label="售后单号" prop="afterNo">
               <el-input v-model="form.afterNo" placeholder="售后单号"
@@ -188,6 +188,7 @@
               <el-input v-model="form.payNo" placeholder="支付流水号"
               />
             </el-form-item>
+
             <el-form-item label="售后类型" prop="afterType">
               <el-input v-model="form.afterType" placeholder="售后类型"
               />
@@ -196,17 +197,7 @@
               <el-input v-model="form.reasion" placeholder="售后原因"
               />
             </el-form-item>
-            <el-form-item label="处理类型" prop="dealType">
-              <el-select v-model="form.dealType"
-                         placeholder="请选择">
-                <el-option
-                  v-for="dict in dealTypeOptions"
-                  :key="dict.value"
-                  :label="dict.label"
-                  :value="dict.value"
-                />
-              </el-select>
-            </el-form-item>
+
             <el-form-item label="提交人" prop="dealByUser">
               <el-input v-model="form.dealByUser" placeholder="提交人"
               />
@@ -223,13 +214,7 @@
               <el-input v-model="form.realPrice" placeholder="实付款"
               />
             </el-form-item>
-            <el-form-item label="处理时间" prop="dealTime">
-              <el-date-picker
-                v-model="form.dealTime"
-                type="datetime"
-                placeholder="选择日期">
-              </el-date-picker>
-            </el-form-item>
+
             <el-form-item label="支付进度" prop="planNums">
               <el-input v-model="form.planNums" placeholder="支付进度"
               />
@@ -254,12 +239,31 @@
               <el-input v-model="form.auditByUser" placeholder="审核人"
               />
             </el-form-item>
+
+            <el-form-item label="处理时间" prop="dealTime">
+              <el-date-picker
+                v-model="form.dealTime"
+                type="datetime"
+                placeholder="选择日期">
+              </el-date-picker>
+            </el-form-item>
             <el-form-item label="审核时间" prop="auditTime">
               <el-date-picker
                 v-model="form.auditTime"
                 type="datetime"
                 placeholder="选择日期">
               </el-date-picker>
+            </el-form-item>
+            <el-form-item label="处理类型" prop="dealType">
+              <el-select v-model="form.dealType"
+                         placeholder="请选择">
+                <el-option
+                  v-for="dict in dealTypeOptions"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
+                />
+              </el-select>
             </el-form-item>
             <el-form-item label="售后状态" prop="state">
               <el-select v-model="form.state"

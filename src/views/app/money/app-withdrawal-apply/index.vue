@@ -160,7 +160,7 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
 
-            <img v-if="imageUrl!== ''" :src="imageUrl" class="avatar" alt="">
+            <img v-if="imageUrl!== ''" :src="baseUrl + imageUrl" class="avatar" alt="">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
           <span slot="footer" class="dialog-footer">
@@ -189,6 +189,7 @@ export default {
   components: {},
   data() {
     return {
+      baseUrl:process.env.VUE_APP_BASE_API,
       url: process.env.VUE_APP_BASE_API + "/api/v1/public/uploadFile",
       dialogImageUrl: '',
       dialogVisible: false,
@@ -290,7 +291,9 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       if (res.code === 200) {
-        this.imageUrl = process.env.VUE_APP_BASE_API + "/" + res.data.full_path
+        // process.env.VUE_APP_BASE_API +
+        // var imgPath =  "/" + res.data.full_path
+        this.imageUrl =  "/" + res.data.full_path
         this.$message({
           message: '上传成功',
           type: 'success'

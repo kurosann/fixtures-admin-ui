@@ -306,7 +306,7 @@ export default {
       return this.selectDictLabel(this.sexOptions, row.sex)
     },
     setImg(url, title) {
-      this.img = url
+      this.img = process.env.VUE_APP_BASE_API + url
       this.title = title
       this.open = true
     },

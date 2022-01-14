@@ -223,20 +223,35 @@
                     <div v-for="(item, j)  in [0,1,2,3,4,5]">
                       <el-upload
                         class="avatar-uploader"
-                        :data="{type:'1',f_name:'format_url'+i+j}"
+                        :data="{type:'1',class:'material',f_name:'format_url'+i+j}"
                         name="file"
                         :headers="{Authorization:authorization}"
                         :action="url"
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload">
-                        <img v-if="item_material['format_url'+i+j]!==''" :src="item_material['format_url'+i+j]"
+                        <img v-if="item_material['format_url'+i+j]!==''" :src="baseUrl + item_material['format_url'+i+j]"
                              class="avatar" alt="">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                       </el-upload>
                     </div>
                   </el-col>
                 </el-col>
+                <br>
+                <el-form-item label="项目图片" prop="imageUrl" style="margin-top: 30px">
+                  <el-upload
+                    class="item-uploader"
+                    :data="{type:'1',class:'item',f_name:'imageUrl'}"
+                    name="file"
+                    :headers="{Authorization:authorization}"
+                    :action="url"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="form.imageUrl !== ''&& form.imageUrl !== undefined" :src="baseUrl + form.imageUrl"  class="itemImg" alt="">
+                    <i v-else class="el-icon-plus item-uploader-icon"></i>
+                  </el-upload>
+                </el-form-item>
               </el-col>
             </el-form>
           </el-row>
@@ -260,6 +275,7 @@ export default {
   components: {},
   data() {
     return {
+      baseUrl:process.env.VUE_APP_BASE_API,
       url: process.env.VUE_APP_BASE_API + "/api/v1/public/uploadFile",
       authorization: "",
       // 遮罩层
@@ -366,6 +382,7 @@ export default {
         itemType: undefined,
         itemCity: undefined,
         remake: undefined,
+        imageUrl: undefined,
         item_material: [],
       }
       this.resetForm('form')
@@ -524,9 +541,13 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       if (res.code === 200) {
-        this.item_material[res.data.f_name] = process.env.VUE_APP_BASE_API + "/" + res.data.full_path
-        console.log(this.item_material[res.data.f_name])
-        console.log(this.item_material)
+       // process.env.VUE_APP_BASE_API +
+        var imgPath =  "/" + res.data.full_path
+        if ("imageUrl" === res.data.f_name){
+          this.form.imageUrl = imgPath
+        }else {
+          this.item_material[res.data.f_name] = imgPath
+        }
       }
     },
     beforeAvatarUpload(file) {
@@ -541,6 +562,34 @@ export default {
 }
 </script>
 <style>
+
+.item-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.item-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.item-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
+
+.itemImg {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -556,15 +605,15 @@ export default {
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
+  width: 31px;
+  height: 31px;
+  line-height: 31px;
   text-align: center;
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  width: 31px;
+  height: 31px;
   display: block;
 }
 </style>
