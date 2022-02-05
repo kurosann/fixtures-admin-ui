@@ -464,7 +464,7 @@ export default {
     handleAdd() {
       this.reset()
       this.open = true
-      this.title = '添加材料管理'
+      this.title = '添加材料'
       this.isEdit = false
     },
     // 多选框选中数据
@@ -542,7 +542,7 @@ export default {
     handleAvatarSuccess(res, file) {
       if (res.code === 200) {
        // process.env.VUE_APP_BASE_API +
-        var imgPath =  "/" + res.data.full_path
+        var imgPath = res.data.full_path
         if ("imageUrl" === res.data.f_name){
           this.form.imageUrl = imgPath
         }else {

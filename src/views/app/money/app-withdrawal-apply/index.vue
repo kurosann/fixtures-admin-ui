@@ -293,7 +293,7 @@ export default {
       if (res.code === 200) {
         // process.env.VUE_APP_BASE_API +
         // var imgPath =  "/" + res.data.full_path
-        this.imageUrl =  "/" + res.data.full_path
+        this.imageUrl = res.data.full_path
         this.$message({
           message: '上传成功',
           type: 'success'
