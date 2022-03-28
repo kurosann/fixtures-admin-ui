@@ -230,9 +230,8 @@
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload">
-                        <img v-if="item_material['format_url'+i+j]!==''" :src="baseUrl + item_material['format_url'+i+j]"
-                             class="avatar" alt="">
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        <img v-if="item_material['format_url'+i+j]!==''" :src="baseUrl + item_material['format_url'+i+j]" alt="" sizes="31">
+                        <i v-else class="el-icon-plus avatar-uploader-icon" style="width: 31px;height: 31px;line-height: 31px;"></i>
                       </el-upload>
                     </div>
                   </el-col>
